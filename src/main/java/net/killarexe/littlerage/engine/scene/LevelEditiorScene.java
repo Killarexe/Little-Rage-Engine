@@ -4,7 +4,10 @@ import net.killarexe.littlerage.engine.Window;
 import net.killarexe.littlerage.engine.gameObject.Camera;
 import net.killarexe.littlerage.engine.gameObject.GameObject;
 import net.killarexe.littlerage.engine.gameObject.Transform;
+import net.killarexe.littlerage.engine.gameObject.components.Sprite;
 import net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer;
+import net.killarexe.littlerage.engine.gameObject.components.SpriteSheet;
+import net.killarexe.littlerage.engine.util.AssetPool;
 import net.killarexe.littlerage.engine.util.Logger;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
@@ -19,26 +22,30 @@ public class LevelEditiorScene extends Scene{
 
     @Override
     public void init() {
+        loadResoucres();
+
         this.camera = new Camera(new Vector2f());
 
-        int xOffset = 10;
-        int yOffset = 10;
+        SpriteSheet spriteSheet = AssetPool.getSpriteSheet("src\\main\\resources\\assets\\textures\\tile\\Tile1.png");
 
-        float totalWidth = (float)(600 - xOffset * 2);
-        float totalHeight = (float)(300 - yOffset * 2);
-        float sizeX = totalWidth/100.0F;
-        float sizeY = totalHeight/100.0F;
+        GameObject gameObject = new GameObject("Test 1", new Transform(new Vector2f(100,100), new Vector2f(256, 256)));
+        gameObject.addComponents(new SpriteRenderer(spriteSheet.getSprite(57)));
+        this.addGameObjectToScene(gameObject);
+        GameObject gameObject1 = new GameObject("Test 2", new Transform(new Vector2f(355,100), new Vector2f(256, 256)));
+        gameObject1.addComponents(new SpriteRenderer(spriteSheet.getSprite(56)));
+        this.addGameObjectToScene(gameObject1);
 
-        for(int x=0; x < 100; x++){
-            for(int y=0; y < 100; y++){
-                float xPos = xOffset + (x * sizeX);
-                float yPos = yOffset + (y * sizeY);
+    }
 
-                GameObject object = new GameObject("Obj" + x + ", " + y, new Transform(new Vector2f(xPos, yPos), new Vector2f(sizeX, sizeY)));
-                object.addComponents(new SpriteRenderer(new Vector4f(xPos/totalWidth, yPos/totalHeight, 1, 1)));
-                this.addGameObjectToScene(object);
-            }
-        }
+    private void loadResoucres(){
+        AssetPool.getShader("src\\main\\resources\\assets\\shaders\\default.glsl");
+
+        AssetPool.addSpriteSheet("src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
+                new SpriteSheet(AssetPool.getTexture("src\\main\\resources\\assets\\textures\\tile\\Tile1.png"),
+                        16,
+                        16,
+                        64,
+                        0));
     }
 
     @Override

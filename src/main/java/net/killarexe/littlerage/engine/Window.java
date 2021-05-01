@@ -3,6 +3,7 @@ package net.killarexe.littlerage.engine;
 import net.killarexe.littlerage.engine.input.*;
 import net.killarexe.littlerage.engine.scene.*;
 import net.killarexe.littlerage.engine.util.*;
+import net.killarexe.littlerage.scene.LevelScene;
 import org.lwjgl.Version;
 import static org.lwjgl.system.MemoryUtil.NULL;
 import static org.lwjgl.glfw.GLFW.*;
@@ -21,7 +22,7 @@ public class Window {
     private long glfwWindow;
     private String title;
     private String VER;
-    private Logger LOGGER = new Logger(getClass());
+    private static Logger LOGGER = new Logger(Window.class);
 
     private Window(){
         this.width = 1280;
@@ -130,7 +131,7 @@ public class Window {
                 currentScene.start();
                 break;
             default:
-                assert false : "Unknown Scene: " + newScene;
+                LOGGER.fatal("Unknown Scene: " + newScene);
                 break;
         }
     }

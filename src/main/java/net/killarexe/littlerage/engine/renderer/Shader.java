@@ -55,12 +55,12 @@ public class Shader {
             } else if (secondPattern.equals("fragement")) {
                 fragementSource = splitString[2];
             } else {
-                logger.error("Unexpected Token '" + secondPattern + "' in '" + filePath + "'");
+                logger.fatal("Unexpected Token '" + secondPattern + "' in '" + filePath + "'");
                 throw new IOException("Unexpected Token '" + secondPattern + "' in '" + filePath + "'");
             }
         } catch (IOException e) {
             e.printStackTrace();
-            assert false : "Couldn't open file for shader '" + filePath + "'";
+            logger.fatal("Couldn't open file for shader '" + filePath + "'");
         }
     }
 
@@ -77,9 +77,8 @@ public class Shader {
         int success = glGetShaderi(vertexID, GL_COMPILE_STATUS);
         if (success == GL_FALSE) {
             int len = glGetShaderi(vertexID, GL_INFO_LOG_LENGTH);
-            logger.error("'" + filePath + "'\n\tVertex shader compilation failed");
+            logger.fatal("'" + filePath + "'\n\tVertex shader compilation failed");
             logger.info(glGetShaderInfoLog(vertexID, len));
-            assert false : "";
         }
 
         //First load and compile the fragment shader
@@ -92,9 +91,8 @@ public class Shader {
         success = glGetShaderi(fragementID, GL_COMPILE_STATUS);
         if (success == GL_FALSE) {
             int len = glGetShaderi(fragementID, GL_INFO_LOG_LENGTH);
-            logger.error("'" + filePath + "'\n\tFragement shader compilation failed");
+            logger.fatal("'" + filePath + "'\n\tFragement shader compilation failed");
             logger.info(glGetShaderInfoLog(fragementID, len));
-            assert false : "";
         }
 
         //link shaders
@@ -107,9 +105,8 @@ public class Shader {
         success = glGetProgrami(shaderProgramID, GL_LINK_STATUS);
         if (success == GL_FALSE) {
             int len = glGetProgrami(shaderProgramID, GL_INFO_LOG_LENGTH);
-            logger.error("'" + filePath + "'\n\tLinking shaders failed");
+            logger.fatal("'" + filePath + "'\n\tLinking shaders failed");
             logger.info(glGetProgramInfoLog(shaderProgramID, len));
-            assert false : "";
         }
 
     }
@@ -168,5 +165,11 @@ public class Shader {
         int varLoaction = glGetUniformLocation(shaderProgramID, varName);
         use();
         glUniform1i(varLoaction, slot);
+    }
+
+    public void uploadIntArray(String varName, int[] array){
+        int varLoaction = glGetUniformLocation(shaderProgramID, varName);
+        use();
+        glUniform1iv(varLoaction, array);
     }
 }

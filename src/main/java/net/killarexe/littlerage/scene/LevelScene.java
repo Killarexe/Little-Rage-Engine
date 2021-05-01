@@ -1,9 +1,10 @@
-package net.killarexe.littlerage.engine.scene;
+package net.killarexe.littlerage.scene;
 
 import net.killarexe.littlerage.engine.Window;
+import net.killarexe.littlerage.engine.scene.Scene;
 import net.killarexe.littlerage.engine.util.Logger;
 
-public class LevelScene extends Scene{
+public class LevelScene extends Scene {
 
     Logger logger = new Logger(getClass());
 
