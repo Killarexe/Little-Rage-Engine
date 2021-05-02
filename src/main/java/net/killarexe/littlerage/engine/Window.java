@@ -1,5 +1,6 @@
 package net.killarexe.littlerage.engine;
 
+import net.killarexe.littlerage.engine.imGui.ImGuiLayer;
 import net.killarexe.littlerage.engine.input.*;
 import net.killarexe.littlerage.engine.scene.*;
 import net.killarexe.littlerage.engine.util.*;
@@ -22,6 +23,8 @@ public class Window {
     private long glfwWindow;
     private String title;
     private String VER;
+    private ImGuiLayer imGuiLayer;
+
     private static Logger LOGGER = new Logger(Window.class);
 
     private Window(){
@@ -84,6 +87,10 @@ public class Window {
         glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
         glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
         glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
+        glfwSetWindowSizeCallback(glfwWindow, (w, newWidth, newHeight) ->{
+            Window.setWidth(newWidth);
+            Window.setHeight(newHeight);
+        });
 
         //Make OpenGL
         glfwMakeContextCurrent(glfwWindow);
@@ -92,6 +99,12 @@ public class Window {
         //Set Window Visible
         glfwShowWindow(glfwWindow);
         GL.createCapabilities();
+
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+
+        this.imGuiLayer = new ImGuiLayer(glfwWindow);
+        this.imGuiLayer.initImGui();
 
         Window.changeScene(0);
     }
@@ -110,6 +123,7 @@ public class Window {
 
             if(dt >= 0)currentScene.update(dt);
 
+            this.imGuiLayer.update(dt);
             glfwSwapBuffers(glfwWindow);
 
             endTime = (float)glfwGetTime();
@@ -136,8 +150,17 @@ public class Window {
         }
     }
 
+    public static void setWidth(int newWidth){
+        getInstance().width = newWidth;
+    }
+
+    public static void setHeight(int newHeight){
+        getInstance().height = newHeight;
+    }
+
     public static Scene getScene(){
         return getInstance().currentScene;
     }
-
+    public static int getWidth(){return getInstance().width;}
+    public static int getHeight(){return getInstance().height;}
 }

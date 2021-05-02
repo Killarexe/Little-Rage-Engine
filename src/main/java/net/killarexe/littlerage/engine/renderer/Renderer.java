@@ -4,6 +4,7 @@ import net.killarexe.littlerage.engine.gameObject.GameObject;
 import net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Renderer {
@@ -24,7 +25,7 @@ public class Renderer {
     private void add(SpriteRenderer renderer){
         boolean added = false;
         for(RenderBatch batch: batches){
-            if(batch.hasRoom()){
+            if(batch.hasRoom() && batch.getzImdex() == renderer.gameObject.getzIndex()){
                 Texture texture = renderer.getTexture();
                 if(texture == null || batch.hasTexture(texture) || batch.hasTextureRoom()) {
                     batch.addSprite(renderer);
@@ -35,10 +36,11 @@ public class Renderer {
         }
 
         if(!added){
-            RenderBatch newBatch = new RenderBatch(MAX_BATCH_SIZE);
+            RenderBatch newBatch = new RenderBatch(MAX_BATCH_SIZE, renderer.gameObject.getzIndex());
             newBatch.start();
             batches.add(newBatch);
             newBatch.addSprite(renderer);
+            Collections.sort(batches);
         }
     }
 

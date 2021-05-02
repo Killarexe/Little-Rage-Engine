@@ -16,6 +16,9 @@ public class LevelEditiorScene extends Scene{
 
     private Logger logger = new Logger(getClass());
 
+    private GameObject obj1;
+    private SpriteSheet spriteSheet;
+
     public LevelEditiorScene(){
         logger.info("Changing to LevelEditior Scene");
     }
@@ -26,14 +29,18 @@ public class LevelEditiorScene extends Scene{
 
         this.camera = new Camera(new Vector2f());
 
-        SpriteSheet spriteSheet = AssetPool.getSpriteSheet("src\\main\\resources\\assets\\textures\\tile\\Tile1.png");
+        spriteSheet = AssetPool.getSpriteSheet("src\\main\\resources\\assets\\textures\\tile\\Tile1.png");
 
-        GameObject gameObject = new GameObject("Test 1", new Transform(new Vector2f(100,100), new Vector2f(256, 256)));
-        gameObject.addComponents(new SpriteRenderer(spriteSheet.getSprite(57)));
-        this.addGameObjectToScene(gameObject);
-        GameObject gameObject1 = new GameObject("Test 2", new Transform(new Vector2f(355,100), new Vector2f(256, 256)));
-        gameObject1.addComponents(new SpriteRenderer(spriteSheet.getSprite(56)));
-        this.addGameObjectToScene(gameObject1);
+        obj1 = new GameObject("Test 1",
+                new Transform(new Vector2f(100,100), new Vector2f(256, 256)),
+                1);
+        obj1.addComponents(new SpriteRenderer(spriteSheet.getSprite(57)));
+        this.addGameObjectToScene(obj1);
+        GameObject obj2 = new GameObject("Test 2",
+                new Transform(new Vector2f(200,100), new Vector2f(256, 256)),
+                2);
+        obj2.addComponents(new SpriteRenderer(spriteSheet.getSprite(56)));
+        this.addGameObjectToScene(obj2);
 
     }
 

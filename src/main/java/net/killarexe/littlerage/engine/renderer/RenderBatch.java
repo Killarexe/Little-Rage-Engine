@@ -14,7 +14,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.ARBVertexArrayObject.*;
 
-public class RenderBatch {
+public class RenderBatch implements Comparable<RenderBatch>{
     //Vertex
     //======
     // pos                  Color                           TexCoords       TexId
@@ -41,10 +41,12 @@ public class RenderBatch {
     private int vaoID, vboID;
     private int maxBatchSize;
     private Shader shader;
+    private int zImdex;
 
     Logger logger = new Logger(getClass());
 
-    public RenderBatch(int maxBatchSize){
+    public RenderBatch(int maxBatchSize, int zImdex){
+        this.zImdex = zImdex;
         logger.info("Creating RenderBatch");
         shader = AssetPool.getShader("src\\main\\resources\\assets\\shaders\\default.glsl");
         this.sprites = new SpriteRenderer[maxBatchSize];
@@ -109,9 +111,21 @@ public class RenderBatch {
     }
 
     public void render(){
-        //rebuffer all data every frame
-        glBindBuffer(GL_ARRAY_BUFFER, vboID);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, vertices);
+        boolean rebufferData = false;
+        for(int i=0; i < numSprites; i++){
+            SpriteRenderer spr = sprites[i];
+            if(spr.isDirty()){
+                loadVertexProperites(i);
+                spr.setClean();
+                rebufferData = true;
+            }
+        }
+
+        if(rebufferData) {
+            //rebuffer all data every frame
+            glBindBuffer(GL_ARRAY_BUFFER, vboID);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, vertices);
+        }
 
         //Use shader
         shader.use();
@@ -229,5 +243,12 @@ public class RenderBatch {
 
     public boolean hasTexture(Texture texture){
         return this.textures.contains(texture);
+    }
+
+    public int getzImdex(){return this.zImdex;}
+
+    @Override
+    public int compareTo(RenderBatch o) {
+        return Integer.compare(this.zImdex, o.zImdex);
     }
 }
