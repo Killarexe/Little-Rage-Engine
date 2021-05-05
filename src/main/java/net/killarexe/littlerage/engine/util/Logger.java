@@ -19,7 +19,5 @@ public class Logger {
     public void error(String msg){
         System.out.println("[ERROR](" + this.className + "): " + msg);
     }
-    public void fatal(String msg){
-        System.err.println("[FATAL](" + this.className + "): " + msg);
-    }
+    public void fatal(String msg){System.err.println("[FATAL](" + this.className + "): " + msg); }
 }

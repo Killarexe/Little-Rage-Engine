@@ -1,6 +1,6 @@
 package net.killarexe.littlerage.engine.util;
 
-import net.killarexe.littlerage.engine.gameObject.components.SpriteSheet;
+import net.killarexe.littlerage.engine.renderer.SpriteSheet;
 import net.killarexe.littlerage.engine.renderer.Shader;
 import net.killarexe.littlerage.engine.renderer.Texture;
 
@@ -33,7 +33,8 @@ public class AssetPool {
         if(AssetPool.textures.containsKey(file.getAbsolutePath())){
             return AssetPool.textures.get(file.getAbsolutePath());
         }else{
-            Texture texture = new Texture(resourceName);
+            Texture texture = new Texture();
+            texture.init(resourceName);
             AssetPool.textures.put(file.getAbsolutePath(), texture);
             return texture;
         }

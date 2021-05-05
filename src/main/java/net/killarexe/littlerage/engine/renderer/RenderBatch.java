@@ -10,7 +10,6 @@ import org.joml.Vector4f;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.ARBVertexArrayObject.*;
 
@@ -182,7 +181,7 @@ public class RenderBatch implements Comparable<RenderBatch>{
             if(i == 1){
                 yAdd = 0.0f;
             }else if(i == 2){
-                xAdd = 0.0f;
+                xAdd = 2.0f;
             }else if(i == 3){
                 yAdd = 1.0f;
             }

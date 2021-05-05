@@ -2,6 +2,7 @@ package net.killarexe.littlerage.engine;
 
 import net.killarexe.littlerage.engine.imGui.ImGuiLayer;
 import net.killarexe.littlerage.engine.input.*;
+import net.killarexe.littlerage.engine.renderer.DebugDraw;
 import net.killarexe.littlerage.engine.scene.*;
 import net.killarexe.littlerage.engine.util.*;
 import net.killarexe.littlerage.scene.LevelScene;
@@ -118,36 +119,42 @@ public class Window {
             //Poll Events
             glfwPollEvents();
 
+            DebugDraw.beginFrame();
+
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            if(dt >= 0)currentScene.update(dt);
+            if(dt >= 0){
+                DebugDraw.draw();
+                currentScene.update(dt);
+            }
 
-            this.imGuiLayer.update(dt);
+            this.imGuiLayer.update(dt, currentScene);
             glfwSwapBuffers(glfwWindow);
 
             endTime = (float)glfwGetTime();
             dt = endTime - beginTime;
             beginTime = endTime;
         }
+        currentScene.saveExit();
     }
 
     public static void changeScene(int newScene){
         switch (newScene){
             case 0:
                 currentScene = new LevelEditiorScene();
-                currentScene.init();
-                currentScene.start();
                 break;
             case 1:
                 currentScene = new LevelScene();
-                currentScene.init();
-                currentScene.start();
                 break;
             default:
                 LOGGER.fatal("Unknown Scene: " + newScene);
                 break;
         }
+
+        currentScene.load();
+        currentScene.init();
+        currentScene.start();
     }
 
     public static void setWidth(int newWidth){

@@ -17,7 +17,10 @@ public class Texture {
 
     Logger logger = new Logger(getClass());
 
-    public Texture(String filePath){
+    //public Texture(String filePath){
+    //}
+
+    public void init(String filePath){
         this.filePath = filePath;
         logger.info("Loading Texture: " + filePath);
 
@@ -58,10 +61,10 @@ public class Texture {
 
         stbi_image_free(image);
     }
-
     public void bind(){glBindTexture(GL_TEXTURE_2D, texID);}
     public void unBind(){glBindTexture(GL_TEXTURE_2D, 0);}
 
     public int getWidth(){return this.width;}
     public int getHeight(){return this.height;}
+    public int getTexID(){return this.texID;};
 }
