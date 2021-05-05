@@ -3,6 +3,7 @@ package net.killarexe.littlerage.engine;
 import net.killarexe.littlerage.engine.imGui.ImGuiLayer;
 import net.killarexe.littlerage.engine.input.*;
 import net.killarexe.littlerage.engine.renderer.DebugDraw;
+import net.killarexe.littlerage.engine.renderer.Framebuffer;
 import net.killarexe.littlerage.engine.scene.*;
 import net.killarexe.littlerage.engine.util.*;
 import net.killarexe.littlerage.scene.LevelScene;
@@ -25,6 +26,7 @@ public class Window {
     private String title;
     private String VER;
     private ImGuiLayer imGuiLayer;
+    private Framebuffer framebuffer;
 
     private static Logger LOGGER = new Logger(Window.class);
 
@@ -54,13 +56,7 @@ public class Window {
         LOGGER.info("Little Rage Initialized!");
         loop();
 
-        //Free Memory
-        glfwFreeCallbacks(glfwWindow);
-        glfwDestroyWindow(glfwWindow);
-
-        //Terminaite
-        glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        stop();
     }
 
     public void init(){
@@ -107,6 +103,8 @@ public class Window {
         this.imGuiLayer = new ImGuiLayer(glfwWindow);
         this.imGuiLayer.initImGui();
 
+        this.framebuffer = new Framebuffer(1680, 1050);
+
         Window.changeScene(0);
     }
 
@@ -124,10 +122,12 @@ public class Window {
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
+            this.framebuffer.bind();
             if(dt >= 0){
                 DebugDraw.draw();
                 currentScene.update(dt);
             }
+            this.framebuffer.unbind();
 
             this.imGuiLayer.update(dt, currentScene);
             glfwSwapBuffers(glfwWindow);
@@ -155,6 +155,16 @@ public class Window {
         currentScene.load();
         currentScene.init();
         currentScene.start();
+    }
+
+    public void stop(){
+        //Free Memory
+        glfwFreeCallbacks(glfwWindow);
+        glfwDestroyWindow(glfwWindow);
+
+        //Terminaite
+        glfwTerminate();
+        glfwSetErrorCallback(null).free();
     }
 
     public static void setWidth(int newWidth){

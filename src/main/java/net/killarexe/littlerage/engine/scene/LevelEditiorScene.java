@@ -4,18 +4,14 @@ import imgui.ImGui;
 import imgui.ImVec2;
 import net.killarexe.littlerage.engine.gameObject.*;
 import net.killarexe.littlerage.engine.gameObject.components.*;
-import net.killarexe.littlerage.engine.renderer.DebugDraw;
 import net.killarexe.littlerage.engine.renderer.Sprite;
 import net.killarexe.littlerage.engine.renderer.SpriteSheet;
 import net.killarexe.littlerage.engine.util.AssetPool;
 import org.joml.Vector2f;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
 
 public class LevelEditiorScene extends Scene{
     private SpriteSheet spriteSheet;
-
-    GameObject levelEditorStuff = new GameObject("LevelEditor", new Transform(new Vector2f()), 0);
+    private GameObject levelEditorStuff = new GameObject("LevelEditor", new Transform(new Vector2f()), 0);
 
     public LevelEditiorScene(){
         logger.info("Changing to LevelEditior Scene");

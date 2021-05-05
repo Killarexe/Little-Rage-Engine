@@ -1,5 +1,7 @@
 package net.killarexe.littlerage.engine.util;
 
+import net.killarexe.littlerage.engine.Window;
+
 public class Logger {
 
     String className;
@@ -16,8 +18,6 @@ public class Logger {
     public void warn(String msg){
         System.out.println("[WARN](" + this.className + "): " + msg);
     }
-    public void error(String msg){
-        System.out.println("[ERROR](" + this.className + "): " + msg);
-    }
-    public void fatal(String msg){System.err.println("[FATAL](" + this.className + "): " + msg); }
+    public void error(String msg){System.err.println("[ERROR](" + this.className + "): " + msg);}
+    public void fatal(String msg){System.err.println("[FATAL](" + this.className + "): " + msg);Window.getInstance().stop();}
 }
