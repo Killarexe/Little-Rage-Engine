@@ -1,6 +1,9 @@
 package net.killarexe.littlerage.engine.input;
 
 import net.killarexe.littlerage.engine.Window;
+import net.killarexe.littlerage.engine.gameObject.Camera;
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -11,6 +14,8 @@ public class MouseListener {
     private double xPos, yPos, lastX, lastY;
     private boolean mouseButtonPressed[] = new boolean[9];
     private boolean isDragging;
+    private Vector2f gameViewportPos = new Vector2f();
+    private Vector2f gameVeiwportSize = new Vector2f();
 
     private MouseListener(){
         this.scrollX = 0.0;
@@ -82,19 +87,25 @@ public class MouseListener {
     }
 
     public static float getOrthoX(){
-        float currentX = getX();
-        currentX = (currentX / (float) Window.getWidth()) * 2f - 1f;
+        float currentX = getX() - getInstance().gameViewportPos.x;
+        currentX = (currentX / getInstance().gameVeiwportSize.x) * 2f - 1f;
         Vector4f tmp = new Vector4f(currentX,0,0,1);
-        tmp.mul(Window.getScene().camera().getInverseProjection()).mul(Window.getScene().camera().getInverseView());
+        Camera camera = Window.getScene().camera();
+        Matrix4f viewProjection = new Matrix4f();
+        camera.getInverseView().mul(camera.getInverseProjection(), viewProjection);
+        tmp.mul(viewProjection);
         currentX = tmp.x;
 
         return currentX;
     }
     public static float getOrthoY(){
-        float currentY = Window.getHeight() - getY();
-        currentY = (currentY / (float) Window.getHeight()) * 2f - 1f;
+        float currentY = getY() - getInstance().gameViewportPos.y;
+        currentY = -((currentY / getInstance().gameVeiwportSize.y) * 2f - 1f);
         Vector4f tmp = new Vector4f(0,currentY,0,1);
-        tmp.mul(Window.getScene().camera().getInverseProjection()).mul(Window.getScene().camera().getInverseView());
+        Camera camera = Window.getScene().camera();
+        Matrix4f viewProjection = new Matrix4f();
+        camera.getInverseView().mul(camera.getInverseProjection(), viewProjection);
+        tmp.mul(viewProjection);
         currentY = tmp.y;
         return currentY;
     }
@@ -106,5 +117,13 @@ public class MouseListener {
         }else{
             return false;
         }
+    }
+
+    public static void setGameViewportPos(Vector2f gameViewportPos) {
+        getInstance().gameViewportPos.set(gameViewportPos);
+    }
+
+    public static void setGameVeiwportSize(Vector2f gameVeiwportSize) {
+        getInstance().gameVeiwportSize.set(gameVeiwportSize);
     }
 }

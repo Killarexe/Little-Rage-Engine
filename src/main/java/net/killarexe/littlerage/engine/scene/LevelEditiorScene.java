@@ -25,7 +25,9 @@ public class LevelEditiorScene extends Scene{
         this.camera = new Camera(new Vector2f());
         spriteSheet = AssetPool.getSpriteSheet("src\\main\\resources\\assets\\textures\\tile\\Tile1.png");
         if(loadedLevel){
-            this.activeGameObject = gameObjects.get(0);
+            if(gameObjects.size() > 0) {
+                this.activeGameObject = gameObjects.get(0);
+            }
             return;
         }
     }
@@ -39,6 +41,15 @@ public class LevelEditiorScene extends Scene{
                         16,
                         64,
                         0));
+
+        for (GameObject g: gameObjects){
+            if(g.getComponents(SpriteRenderer.class) != null){
+                SpriteRenderer renderer = g.getComponents(SpriteRenderer.class);
+                if(renderer.getTexture() != null){
+                    renderer.setTexture(AssetPool.getTexture(renderer.getTexture().getFilePath()));
+                }
+            }
+        }
     }
 
     @Override
@@ -57,7 +68,7 @@ public class LevelEditiorScene extends Scene{
     public void imgui() {
         ImGui.begin("Tile Palette");
 
-        ImVec2 windowPos = new ImVec2();
+        ImVec2 windowPos = new ImVec2(10f, 10f);
         ImGui.getWindowPos(windowPos);
         ImVec2 windowSize = new ImVec2();
         ImGui.getWindowSize(windowSize);

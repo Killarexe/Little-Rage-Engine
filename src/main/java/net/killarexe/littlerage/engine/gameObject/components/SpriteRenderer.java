@@ -67,4 +67,8 @@ public class SpriteRenderer extends Component{
         }
         super.imgui();
     }
+
+    public void setTexture(Texture texture){
+        this.sprite.setTexture(texture);
+    }
 }

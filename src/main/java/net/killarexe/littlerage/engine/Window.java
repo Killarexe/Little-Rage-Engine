@@ -31,8 +31,8 @@ public class Window {
     private static Logger LOGGER = new Logger(Window.class);
 
     private Window(){
-        this.width = 1280;
-        this.height = 720;
+        this.width = 1680;
+        this.height = 1050;
         this.VER = "0.1a";
         this.title = "Little Rage " + this.VER;
         r = 1;
@@ -103,7 +103,8 @@ public class Window {
         this.imGuiLayer = new ImGuiLayer(glfwWindow);
         this.imGuiLayer.initImGui();
 
-        this.framebuffer = new Framebuffer(1680, 1050);
+        this.framebuffer = new Framebuffer(width, height);
+        glViewport(0,0, width, height);
 
         Window.changeScene(0);
     }
@@ -119,10 +120,10 @@ public class Window {
 
             DebugDraw.beginFrame();
 
+            this.framebuffer.bind();
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            this.framebuffer.bind();
             if(dt >= 0){
                 DebugDraw.draw();
                 currentScene.update(dt);
@@ -180,4 +181,7 @@ public class Window {
     }
     public static int getWidth(){return getInstance().width;}
     public static int getHeight(){return getInstance().height;}
+    public static Framebuffer getFramebuffer(){return getInstance().framebuffer;}
+    public static float getTargetAspect169(){return 16.0f / 9.0f;}
+    public static float getTargetAspect1610(){return 16.0f / 10.0f;}
 }

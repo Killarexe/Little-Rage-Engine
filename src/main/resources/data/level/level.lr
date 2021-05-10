@@ -17,7 +17,6 @@
             "height": 16,
             "texture": {
               "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
               "width": 128,
               "height": 128,
               "logger": {
@@ -26,20 +25,20 @@
             },
             "texCoords": [
               {
-                "x": 0.75,
-                "y": 0.75
+                "x": 0.5,
+                "y": 0.0
               },
               {
-                "x": 0.75,
-                "y": 0.875
+                "x": 0.5,
+                "y": 0.125
               },
               {
-                "x": 0.875,
-                "y": 0.875
+                "x": 0.625,
+                "y": 0.125
               },
               {
-                "x": 0.875,
-                "y": 0.75
+                "x": 0.625,
+                "y": 0.0
               }
             ]
           },
@@ -49,8 +48,8 @@
     ],
     "transform": {
       "pos": {
-        "x": 736.0,
-        "y": 384.0
+        "x": 544.0,
+        "y": 544.0
       },
       "scale": {
         "x": 32.0,
@@ -77,7 +76,6 @@
             "height": 16,
             "texture": {
               "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
               "width": 128,
               "height": 128,
               "logger": {
@@ -86,20 +84,20 @@
             },
             "texCoords": [
               {
-                "x": 0.625,
-                "y": 0.75
-              },
-              {
-                "x": 0.625,
-                "y": 0.875
+                "x": 0.75,
+                "y": 0.375
               },
               {
                 "x": 0.75,
-                "y": 0.875
+                "y": 0.5
               },
               {
-                "x": 0.75,
-                "y": 0.75
+                "x": 0.875,
+                "y": 0.5
+              },
+              {
+                "x": 0.875,
+                "y": 0.375
               }
             ]
           },
@@ -109,8 +107,8 @@
     ],
     "transform": {
       "pos": {
-        "x": 704.0,
-        "y": 384.0
+        "x": 544.0,
+        "y": 576.0
       },
       "scale": {
         "x": 32.0,
@@ -137,7 +135,6 @@
             "height": 16,
             "texture": {
               "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
               "width": 128,
               "height": 128,
               "logger": {
@@ -146,19 +143,19 @@
             },
             "texCoords": [
               {
-                "x": 0.875,
+                "x": 0.5,
                 "y": 0.75
               },
               {
-                "x": 0.875,
+                "x": 0.5,
                 "y": 0.875
               },
               {
-                "x": 1.0,
+                "x": 0.625,
                 "y": 0.875
               },
               {
-                "x": 1.0,
+                "x": 0.625,
                 "y": 0.75
               }
             ]
@@ -169,8 +166,8 @@
     ],
     "transform": {
       "pos": {
-        "x": 768.0,
-        "y": 384.0
+        "x": 1184.0,
+        "y": 640.0
       },
       "scale": {
         "x": 32.0,
@@ -197,7 +194,6 @@
             "height": 16,
             "texture": {
               "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
               "width": 128,
               "height": 128,
               "logger": {
@@ -206,31 +202,31 @@
             },
             "texCoords": [
               {
-                "x": 0.75,
-                "y": 0.625
+                "x": 0.375,
+                "y": 0.0
               },
               {
-                "x": 0.75,
-                "y": 0.75
+                "x": 0.375,
+                "y": 0.125
               },
               {
-                "x": 0.875,
-                "y": 0.75
+                "x": 0.5,
+                "y": 0.125
               },
               {
-                "x": 0.875,
-                "y": 0.625
+                "x": 0.5,
+                "y": 0.0
               }
             ]
           },
-          "uid": 5
+          "uid": 7
         }
       }
     ],
     "transform": {
       "pos": {
-        "x": 736.0,
-        "y": 416.0
+        "x": 1440.0,
+        "y": 928.0
       },
       "scale": {
         "x": 32.0,
@@ -257,7 +253,6 @@
             "height": 16,
             "texture": {
               "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
               "width": 128,
               "height": 128,
               "logger": {
@@ -266,31 +261,31 @@
             },
             "texCoords": [
               {
-                "x": 0.25,
-                "y": 0.375
-              },
-              {
-                "x": 0.25,
-                "y": 0.5
+                "x": 0.375,
+                "y": 0.0
               },
               {
                 "x": 0.375,
-                "y": 0.5
+                "y": 0.125
               },
               {
-                "x": 0.375,
-                "y": 0.375
+                "x": 0.5,
+                "y": 0.125
+              },
+              {
+                "x": 0.5,
+                "y": 0.0
               }
             ]
           },
-          "uid": 6
+          "uid": 10
         }
       }
     ],
     "transform": {
       "pos": {
-        "x": 640.0,
-        "y": 384.0
+        "x": 512.0,
+        "y": 544.0
       },
       "scale": {
         "x": 32.0,
@@ -317,7 +312,6 @@
             "height": 16,
             "texture": {
               "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
               "width": 128,
               "height": 128,
               "logger": {
@@ -326,31 +320,31 @@
             },
             "texCoords": [
               {
-                "x": 0.125,
+                "x": 0.625,
                 "y": 0.0
               },
               {
-                "x": 0.125,
+                "x": 0.625,
                 "y": 0.125
               },
               {
-                "x": 0.25,
+                "x": 0.75,
                 "y": 0.125
               },
               {
-                "x": 0.25,
+                "x": 0.75,
                 "y": 0.0
               }
             ]
           },
-          "uid": 7
+          "uid": 11
         }
       }
     ],
     "transform": {
       "pos": {
-        "x": 704.0,
-        "y": 352.0
+        "x": 576.0,
+        "y": 544.0
       },
       "scale": {
         "x": 32.0,
@@ -377,7 +371,6 @@
             "height": 16,
             "texture": {
               "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
               "width": 128,
               "height": 128,
               "logger": {
@@ -386,31 +379,31 @@
             },
             "texCoords": [
               {
-                "x": 0.125,
-                "y": 0.0
-              },
-              {
-                "x": 0.125,
+                "x": 0.5,
                 "y": 0.125
               },
               {
-                "x": 0.25,
-                "y": 0.125
+                "x": 0.5,
+                "y": 0.25
               },
               {
-                "x": 0.25,
-                "y": 0.0
+                "x": 0.625,
+                "y": 0.25
+              },
+              {
+                "x": 0.625,
+                "y": 0.125
               }
             ]
           },
-          "uid": 8
+          "uid": 12
         }
       }
     ],
     "transform": {
       "pos": {
-        "x": 736.0,
-        "y": 352.0
+        "x": 544.0,
+        "y": 512.0
       },
       "scale": {
         "x": 32.0,
@@ -437,7 +430,6 @@
             "height": 16,
             "texture": {
               "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
               "width": 128,
               "height": 128,
               "logger": {
@@ -446,31 +438,31 @@
             },
             "texCoords": [
               {
-                "x": 0.125,
-                "y": 0.0
-              },
-              {
-                "x": 0.125,
+                "x": 0.375,
                 "y": 0.125
               },
               {
-                "x": 0.25,
-                "y": 0.125
+                "x": 0.375,
+                "y": 0.25
               },
               {
-                "x": 0.25,
-                "y": 0.0
+                "x": 0.5,
+                "y": 0.25
+              },
+              {
+                "x": 0.5,
+                "y": 0.125
               }
             ]
           },
-          "uid": 9
+          "uid": 13
         }
       }
     ],
     "transform": {
       "pos": {
-        "x": 768.0,
-        "y": 352.0
+        "x": 512.0,
+        "y": 512.0
       },
       "scale": {
         "x": 32.0,
@@ -497,7 +489,6 @@
             "height": 16,
             "texture": {
               "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
               "width": 128,
               "height": 128,
               "logger": {
@@ -506,31 +497,31 @@
             },
             "texCoords": [
               {
-                "x": 0.125,
-                "y": 0.0
-              },
-              {
-                "x": 0.125,
+                "x": 0.625,
                 "y": 0.125
               },
               {
-                "x": 0.25,
-                "y": 0.125
+                "x": 0.625,
+                "y": 0.25
               },
               {
-                "x": 0.25,
-                "y": 0.0
+                "x": 0.75,
+                "y": 0.25
+              },
+              {
+                "x": 0.75,
+                "y": 0.125
               }
             ]
           },
-          "uid": 10
+          "uid": 14
         }
       }
     ],
     "transform": {
       "pos": {
-        "x": 672.0,
-        "y": 352.0
+        "x": 576.0,
+        "y": 512.0
       },
       "scale": {
         "x": 32.0,
@@ -557,7 +548,6 @@
             "height": 16,
             "texture": {
               "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
               "width": 128,
               "height": 128,
               "logger": {
@@ -566,31 +556,31 @@
             },
             "texCoords": [
               {
-                "x": 0.125,
-                "y": 0.0
+                "x": 0.5,
+                "y": 0.25
               },
               {
-                "x": 0.125,
-                "y": 0.125
+                "x": 0.5,
+                "y": 0.375
               },
               {
-                "x": 0.25,
-                "y": 0.125
+                "x": 0.625,
+                "y": 0.375
               },
               {
-                "x": 0.25,
-                "y": 0.0
+                "x": 0.625,
+                "y": 0.25
               }
             ]
           },
-          "uid": 11
+          "uid": 15
         }
       }
     ],
     "transform": {
       "pos": {
-        "x": 640.0,
-        "y": 352.0
+        "x": 544.0,
+        "y": 480.0
       },
       "scale": {
         "x": 32.0,
@@ -617,7 +607,6 @@
             "height": 16,
             "texture": {
               "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
               "width": 128,
               "height": 128,
               "logger": {
@@ -626,31 +615,31 @@
             },
             "texCoords": [
               {
-                "x": 0.25,
-                "y": 0.0
-              },
-              {
-                "x": 0.25,
-                "y": 0.125
+                "x": 0.375,
+                "y": 0.25
               },
               {
                 "x": 0.375,
-                "y": 0.125
+                "y": 0.375
               },
               {
-                "x": 0.375,
-                "y": 0.0
+                "x": 0.5,
+                "y": 0.375
+              },
+              {
+                "x": 0.5,
+                "y": 0.25
               }
             ]
           },
-          "uid": 12
+          "uid": 16
         }
       }
     ],
     "transform": {
       "pos": {
-        "x": 800.0,
-        "y": 352.0
+        "x": 480.0,
+        "y": 480.0
       },
       "scale": {
         "x": 32.0,
@@ -677,7 +666,6 @@
             "height": 16,
             "texture": {
               "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
               "width": 128,
               "height": 128,
               "logger": {
@@ -686,31 +674,31 @@
             },
             "texCoords": [
               {
-                "x": 0.0,
-                "y": 0.0
+                "x": 0.625,
+                "y": 0.25
               },
               {
-                "x": 0.0,
-                "y": 0.125
+                "x": 0.625,
+                "y": 0.375
               },
               {
-                "x": 0.125,
-                "y": 0.125
+                "x": 0.75,
+                "y": 0.375
               },
               {
-                "x": 0.125,
-                "y": 0.0
+                "x": 0.75,
+                "y": 0.25
               }
             ]
           },
-          "uid": 13
+          "uid": 17
         }
       }
     ],
     "transform": {
       "pos": {
-        "x": 608.0,
-        "y": 352.0
+        "x": 576.0,
+        "y": 448.0
       },
       "scale": {
         "x": 32.0,
@@ -737,7 +725,6 @@
             "height": 16,
             "texture": {
               "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
               "width": 128,
               "height": 128,
               "logger": {
@@ -746,31 +733,31 @@
             },
             "texCoords": [
               {
-                "x": 0.0,
-                "y": 0.125
-              },
-              {
-                "x": 0.0,
+                "x": 0.625,
                 "y": 0.25
               },
               {
-                "x": 0.125,
-                "y": 0.25
+                "x": 0.625,
+                "y": 0.375
               },
               {
-                "x": 0.125,
-                "y": 0.125
+                "x": 0.75,
+                "y": 0.375
+              },
+              {
+                "x": 0.75,
+                "y": 0.25
               }
             ]
           },
-          "uid": 14
+          "uid": 18
         }
       }
     ],
     "transform": {
       "pos": {
-        "x": 608.0,
-        "y": 320.0
+        "x": 576.0,
+        "y": 480.0
       },
       "scale": {
         "x": 32.0,
@@ -788,8 +775,8 @@
         "properties": {
           "color": {
             "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
+            "y": 0.99999,
+            "z": 0.99999,
             "w": 1.0
           },
           "sprite": {
@@ -797,7 +784,6 @@
             "height": 16,
             "texture": {
               "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
               "width": 128,
               "height": 128,
               "logger": {
@@ -805,260 +791,20 @@
               }
             },
             "texCoords": [
-              {
-                "x": 0.0,
-                "y": 0.25
-              },
-              {
-                "x": 0.0,
-                "y": 0.375
-              },
-              {
-                "x": 0.125,
-                "y": 0.375
-              },
-              {
-                "x": 0.125,
-                "y": 0.25
-              }
-            ]
-          },
-          "uid": 15
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 608.0,
-        "y": 288.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 15,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.25,
-                "y": 0.25
-              },
-              {
-                "x": 0.25,
-                "y": 0.375
-              },
-              {
-                "x": 0.375,
-                "y": 0.375
-              },
-              {
-                "x": 0.375,
-                "y": 0.25
-              }
-            ]
-          },
-          "uid": 16
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 800.0,
-        "y": 288.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 16,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.25,
-                "y": 0.125
-              },
-              {
-                "x": 0.25,
-                "y": 0.25
-              },
               {
                 "x": 0.375,
                 "y": 0.25
               },
               {
                 "x": 0.375,
-                "y": 0.125
-              }
-            ]
-          },
-          "uid": 17
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 800.0,
-        "y": 320.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 17,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.125,
-                "y": 0.25
-              },
-              {
-                "x": 0.125,
                 "y": 0.375
               },
               {
-                "x": 0.25,
+                "x": 0.5,
                 "y": 0.375
               },
               {
-                "x": 0.25,
-                "y": 0.25
-              }
-            ]
-          },
-          "uid": 18
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 768.0,
-        "y": 288.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 18,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.125,
-                "y": 0.25
-              },
-              {
-                "x": 0.125,
-                "y": 0.375
-              },
-              {
-                "x": 0.25,
-                "y": 0.375
-              },
-              {
-                "x": 0.25,
+                "x": 0.5,
                 "y": 0.25
               }
             ]
@@ -1069,8 +815,8 @@
     ],
     "transform": {
       "pos": {
-        "x": 736.0,
-        "y": 288.0
+        "x": 512.0,
+        "y": 480.0
       },
       "scale": {
         "x": 32.0,
@@ -1080,7 +826,7 @@
     "zIndex": 0
   },
   {
-    "uid": 19,
+    "uid": 2,
     "name": "Sprite_Prefab",
     "components": [
       {
@@ -1097,7 +843,6 @@
             "height": 16,
             "texture": {
               "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
               "width": 128,
               "height": 128,
               "logger": {
@@ -1107,139 +852,19 @@
             "texCoords": [
               {
                 "x": 0.125,
-                "y": 0.25
+                "y": 0.625
               },
               {
                 "x": 0.125,
-                "y": 0.375
+                "y": 0.75
               },
               {
                 "x": 0.25,
-                "y": 0.375
+                "y": 0.75
               },
               {
                 "x": 0.25,
-                "y": 0.25
-              }
-            ]
-          },
-          "uid": 20
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 704.0,
-        "y": 288.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 20,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.125,
-                "y": 0.25
-              },
-              {
-                "x": 0.125,
-                "y": 0.375
-              },
-              {
-                "x": 0.25,
-                "y": 0.375
-              },
-              {
-                "x": 0.25,
-                "y": 0.25
-              }
-            ]
-          },
-          "uid": 21
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 672.0,
-        "y": 288.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 21,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.125,
-                "y": 0.25
-              },
-              {
-                "x": 0.125,
-                "y": 0.375
-              },
-              {
-                "x": 0.25,
-                "y": 0.375
-              },
-              {
-                "x": 0.25,
-                "y": 0.25
+                "y": 0.625
               }
             ]
           },
@@ -1249,728 +874,8 @@
     ],
     "transform": {
       "pos": {
-        "x": 640.0,
-        "y": 288.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 22,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.125,
-                "y": 0.125
-              },
-              {
-                "x": 0.125,
-                "y": 0.25
-              },
-              {
-                "x": 0.25,
-                "y": 0.25
-              },
-              {
-                "x": 0.25,
-                "y": 0.125
-              }
-            ]
-          },
-          "uid": 23
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 640.0,
-        "y": 320.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 23,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.125,
-                "y": 0.125
-              },
-              {
-                "x": 0.125,
-                "y": 0.25
-              },
-              {
-                "x": 0.25,
-                "y": 0.25
-              },
-              {
-                "x": 0.25,
-                "y": 0.125
-              }
-            ]
-          },
-          "uid": 24
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 672.0,
-        "y": 320.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 24,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.125,
-                "y": 0.125
-              },
-              {
-                "x": 0.125,
-                "y": 0.25
-              },
-              {
-                "x": 0.25,
-                "y": 0.25
-              },
-              {
-                "x": 0.25,
-                "y": 0.125
-              }
-            ]
-          },
-          "uid": 25
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 704.0,
-        "y": 320.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 25,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.125,
-                "y": 0.125
-              },
-              {
-                "x": 0.125,
-                "y": 0.25
-              },
-              {
-                "x": 0.25,
-                "y": 0.25
-              },
-              {
-                "x": 0.25,
-                "y": 0.125
-              }
-            ]
-          },
-          "uid": 26
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 736.0,
-        "y": 320.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 26,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 0.99999,
-            "z": 0.99999,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.125,
-                "y": 0.125
-              },
-              {
-                "x": 0.125,
-                "y": 0.25
-              },
-              {
-                "x": 0.25,
-                "y": 0.25
-              },
-              {
-                "x": 0.25,
-                "y": 0.125
-              }
-            ]
-          },
-          "uid": 27
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 768.0,
-        "y": 320.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 27,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.75,
-                "y": 0.125
-              },
-              {
-                "x": 0.75,
-                "y": 0.25
-              },
-              {
-                "x": 0.875,
-                "y": 0.25
-              },
-              {
-                "x": 0.875,
-                "y": 0.125
-              }
-            ]
-          },
-          "uid": 28
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 608.0,
-        "y": 416.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 28,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.75,
-                "y": 0.25
-              },
-              {
-                "x": 0.75,
-                "y": 0.375
-              },
-              {
-                "x": 0.875,
-                "y": 0.375
-              },
-              {
-                "x": 0.875,
-                "y": 0.25
-              }
-            ]
-          },
-          "uid": 29
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 608.0,
-        "y": 384.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 29,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.875,
-                "y": 0.0
-              },
-              {
-                "x": 0.875,
-                "y": 0.125
-              },
-              {
-                "x": 1.0,
-                "y": 0.125
-              },
-              {
-                "x": 1.0,
-                "y": 0.0
-              }
-            ]
-          },
-          "uid": 30
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 672.0,
-        "y": 448.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 30,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.875,
-                "y": 0.25
-              },
-              {
-                "x": 0.875,
-                "y": 0.375
-              },
-              {
-                "x": 1.0,
-                "y": 0.375
-              },
-              {
-                "x": 1.0,
-                "y": 0.25
-              }
-            ]
-          },
-          "uid": 31
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 672.0,
-        "y": 384.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 31,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.875,
-                "y": 0.125
-              },
-              {
-                "x": 0.875,
-                "y": 0.25
-              },
-              {
-                "x": 1.0,
-                "y": 0.25
-              },
-              {
-                "x": 1.0,
-                "y": 0.125
-              }
-            ]
-          },
-          "uid": 32
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 672.0,
-        "y": 416.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 32,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.125,
-                "y": 0.125
-              },
-              {
-                "x": 0.125,
-                "y": 0.25
-              },
-              {
-                "x": 0.25,
-                "y": 0.25
-              },
-              {
-                "x": 0.25,
-                "y": 0.125
-              }
-            ]
-          },
-          "uid": 35
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 416.0,
-        "y": 352.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      }
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 33,
-    "name": "Sprite_Prefab",
-    "components": [
-      {
-        "type": "net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 0.99999,
-            "z": 0.99999,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16,
-            "height": 16,
-            "texture": {
-              "filePath": "src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-              "texID": 2,
-              "width": 128,
-              "height": 128,
-              "logger": {
-                "className": "Texture"
-              }
-            },
-            "texCoords": [
-              {
-                "x": 0.75,
-                "y": 0.25
-              },
-              {
-                "x": 0.75,
-                "y": 0.375
-              },
-              {
-                "x": 0.875,
-                "y": 0.375
-              },
-              {
-                "x": 0.875,
-                "y": 0.25
-              }
-            ]
-          },
-          "uid": 38
-        }
-      }
-    ],
-    "transform": {
-      "pos": {
-        "x": 576.0,
-        "y": 160.0
+        "x": 1312.0,
+        "y": 864.0
       },
       "scale": {
         "x": 32.0,
