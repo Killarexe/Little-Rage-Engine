@@ -15,7 +15,7 @@ public class MouseListener {
     private boolean mouseButtonPressed[] = new boolean[9];
     private boolean isDragging;
     private Vector2f gameViewportPos = new Vector2f();
-    private Vector2f gameVeiwportSize = new Vector2f();
+    private Vector2f gameViewportSize = new Vector2f();
 
     private MouseListener(){
         this.scrollX = 0.0;
@@ -86,9 +86,20 @@ public class MouseListener {
         return getInstance().isDragging;
     }
 
+    public static float getScreenX(){
+        float currentX = getX() - getInstance().gameViewportPos.x;
+        currentX = (currentX / getInstance().gameViewportSize.x) * Window.getWidth();
+        return currentX;
+    }
+    public static float getScreenY(){
+        float currentY = getY() - getInstance().gameViewportPos.y;
+        currentY = Window.getHeight() - ((currentY / getInstance().gameViewportSize.y) * Window.getHeight());
+        return currentY;
+    }
+
     public static float getOrthoX(){
         float currentX = getX() - getInstance().gameViewportPos.x;
-        currentX = (currentX / getInstance().gameVeiwportSize.x) * 2f - 1f;
+        currentX = (currentX / getInstance().gameViewportSize.x) * 2f - 1f;
         Vector4f tmp = new Vector4f(currentX,0,0,1);
         Camera camera = Window.getScene().camera();
         Matrix4f viewProjection = new Matrix4f();
@@ -100,7 +111,7 @@ public class MouseListener {
     }
     public static float getOrthoY(){
         float currentY = getY() - getInstance().gameViewportPos.y;
-        currentY = -((currentY / getInstance().gameVeiwportSize.y) * 2f - 1f);
+        currentY = -((currentY / getInstance().gameViewportSize.y) * 2f - 1f);
         Vector4f tmp = new Vector4f(0,currentY,0,1);
         Camera camera = Window.getScene().camera();
         Matrix4f viewProjection = new Matrix4f();
@@ -124,6 +135,6 @@ public class MouseListener {
     }
 
     public static void setGameVeiwportSize(Vector2f gameVeiwportSize) {
-        getInstance().gameVeiwportSize.set(gameVeiwportSize);
+        getInstance().gameViewportSize.set(gameVeiwportSize);
     }
 }

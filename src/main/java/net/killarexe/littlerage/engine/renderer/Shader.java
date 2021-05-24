@@ -52,7 +52,7 @@ public class Shader {
 
             if (secondPattern.equals("vertex")) {
                 vertexSource = splitString[2];
-            } else if (secondPattern.equals("fragement")) {
+            } else if (secondPattern.equals("fragment")) {
                 fragementSource = splitString[2];
             } else {
                 logger.fatal("Unexpected Token '" + secondPattern + "' in '" + filePath + "'");

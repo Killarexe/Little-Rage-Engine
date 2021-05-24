@@ -8,8 +8,10 @@ import imgui.gl3.*;
 import imgui.type.ImBoolean;
 import net.killarexe.littlerage.engine.Window;
 import net.killarexe.littlerage.engine.editor.GameViewWindow;
+import net.killarexe.littlerage.engine.editor.PropertiesWindow;
 import net.killarexe.littlerage.engine.input.KeyListener;
 import net.killarexe.littlerage.engine.input.MouseListener;
+import net.killarexe.littlerage.engine.renderer.PickingTexture;
 import net.killarexe.littlerage.engine.scene.Scene;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -24,8 +26,13 @@ public class ImGuiLayer {
     // LWJGL3 renderer (SHOULD be initialized)
     private final ImGuiImplGl3 imGuiGl3 = new ImGuiImplGl3();
 
-    public ImGuiLayer(long glfwWindow){
+    private GameViewWindow viewWindow;
+    private PropertiesWindow propertiesWindow;
+
+    public ImGuiLayer(long glfwWindow, PickingTexture pickingTexture){
         this.glfwWindow = glfwWindow;
+        this.viewWindow = new GameViewWindow();
+        this.propertiesWindow = new PropertiesWindow(pickingTexture);
     }
 
     // Initialize Dear ImGui.
@@ -38,7 +45,7 @@ public class ImGuiLayer {
         // Initialize ImGuiIO config
         final ImGuiIO io = ImGui.getIO();
 
-        io.setIniFilename("src/main/resources/data/config/imguicfg.ini"); // We don't want to save .ini file
+        io.setIniFilename("data/config/imguicfg.ini"); // We don't want to save .ini file
         io.setConfigFlags(ImGuiConfigFlags.NavEnableKeyboard); // Navigation with keyboard
         io.setConfigFlags(ImGuiConfigFlags.DockingEnable);
         io.setBackendFlags(ImGuiBackendFlags.HasMouseCursors); // Mouse cursors to display while resizing windows etc.
@@ -124,7 +131,7 @@ public class ImGuiLayer {
                 ImGui.setWindowFocus(null);
             }
 
-            if(!io.getWantCaptureMouse() ||  !GameViewWindow.getWantCaptureMouse()){
+            if(!io.getWantCaptureMouse() || viewWindow.getWantCaptureMouse()){
                 MouseListener.mouseButtonCallback(w, button, action, mods);
             }
         });
@@ -132,6 +139,7 @@ public class ImGuiLayer {
         glfwSetScrollCallback(glfwWindow, (w, xOffset, yOffset) -> {
             io.setMouseWheelH(io.getMouseWheelH() + (float) xOffset);
             io.setMouseWheel(io.getMouseWheel() + (float) yOffset);
+            MouseListener.mouseScrollCallback(w, xOffset, yOffset);
         });
 
         io.setSetClipboardTextFn(new ImStrConsumer() {
@@ -164,7 +172,7 @@ public class ImGuiLayer {
 
         // Fonts merge example
         fontConfig.setPixelSnapH(true);
-        fontAtlas.addFontFromFileTTF("src/main/resources/assets/fonts/Minecraft.ttf", 16, fontConfig);
+        fontAtlas.addFontFromFileTTF("assets/fonts/Minecraft.ttf", 16, fontConfig);
 
         fontConfig.destroy(); // After all fonts were added we don't need this config mor// -----------------------------------------------------------// Use freetype instead of stb_truetype to build a fonts texture
         ImGuiFreeType.buildFontAtlas(fontAtlas, ImGuiFreeType.RasterizerFlags.LightHinting);
@@ -181,9 +189,11 @@ public class ImGuiLayer {
         // Any Dear ImGui code SHOULD go between ImGui.newFrame()/ImGui.render() methods
         ImGui.newFrame();
         setupDockspace();
-        scene.sceneImgui();
+        scene.imgui();
         ImGui.showDemoWindow();
-        GameViewWindow.imgui();
+        propertiesWindow.update(dt, scene);
+        propertiesWindow.imgui();
+        viewWindow.imgui();
         ImGui.end();
         ImGui.render();
 

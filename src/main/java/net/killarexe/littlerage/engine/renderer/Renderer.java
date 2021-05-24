@@ -10,6 +10,7 @@ import java.util.List;
 public class Renderer {
     private final int MAX_BATCH_SIZE = 65536;
     private List<RenderBatch> batches;
+    private static Shader currentShader;
 
     public Renderer(){
         this.batches = new ArrayList<>();
@@ -25,7 +26,7 @@ public class Renderer {
     private void add(SpriteRenderer renderer){
         boolean added = false;
         for(RenderBatch batch: batches){
-            if(batch.hasRoom() && batch.getzImdex() == renderer.gameObject.getzIndex()){
+            if(batch.hasRoom() && batch.getzIndex() == renderer.gameObject.getzIndex()){
                 Texture texture = renderer.getTexture();
                 if(texture == null || batch.hasTexture(texture) || batch.hasTextureRoom()) {
                     batch.addSprite(renderer);
@@ -45,8 +46,17 @@ public class Renderer {
     }
 
     public void render(){
+        currentShader.use();
         for(RenderBatch batch: batches){
             batch.render();
         }
+    }
+
+    public static void bindShader(Shader shader){
+        currentShader = shader;
+    }
+
+    public static Shader getBoundShader() {
+        return currentShader;
     }
 }

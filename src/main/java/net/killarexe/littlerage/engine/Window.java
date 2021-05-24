@@ -1,9 +1,9 @@
 package net.killarexe.littlerage.engine;
 
+import net.killarexe.littlerage.engine.editor.GameViewWindow;
 import net.killarexe.littlerage.engine.imGui.ImGuiLayer;
 import net.killarexe.littlerage.engine.input.*;
-import net.killarexe.littlerage.engine.renderer.DebugDraw;
-import net.killarexe.littlerage.engine.renderer.Framebuffer;
+import net.killarexe.littlerage.engine.renderer.*;
 import net.killarexe.littlerage.engine.scene.*;
 import net.killarexe.littlerage.engine.util.*;
 import net.killarexe.littlerage.scene.LevelScene;
@@ -13,6 +13,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.opengl.GL;
 
 public class Window {
@@ -27,8 +28,10 @@ public class Window {
     private String VER;
     private ImGuiLayer imGuiLayer;
     private Framebuffer framebuffer;
+    private PickingTexture pickingTexture;
 
     private static Logger LOGGER = new Logger(Window.class);
+    Logger logger = LOGGER;
 
     private Window(){
         this.width = 1680;
@@ -100,11 +103,12 @@ public class Window {
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
-        this.imGuiLayer = new ImGuiLayer(glfwWindow);
-        this.imGuiLayer.initImGui();
-
         this.framebuffer = new Framebuffer(width, height);
+        this.pickingTexture = new PickingTexture(width, height);
         glViewport(0,0, width, height);
+
+        this.imGuiLayer = new ImGuiLayer(glfwWindow, pickingTexture);
+        this.imGuiLayer.initImGui();
 
         Window.changeScene(0);
     }
@@ -114,10 +118,27 @@ public class Window {
         float endTime;
         float dt = -1.0f;
 
+        Shader defaultShader = AssetPool.getShader("assets/shaders/default.glsl");
+        Shader pickingShader = AssetPool.getShader("assets/shaders/pickingShader.glsl");
+
         while(!glfwWindowShouldClose(glfwWindow)){
             //Poll Events
             glfwPollEvents();
 
+            //Render pass 1. Render to picking texture
+            glDisable(GL_BLEND);
+            pickingTexture.enableWriting();
+            glViewport(0,0,width, height);
+            glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            Renderer.bindShader(pickingShader);
+            currentScene.render();
+
+            pickingTexture.disableWriting();
+            glEnable(GL_BLEND);
+
+            //Render pass 2. Render actual game
             DebugDraw.beginFrame();
 
             this.framebuffer.bind();
@@ -126,12 +147,15 @@ public class Window {
 
             if(dt >= 0){
                 DebugDraw.draw();
+                Renderer.bindShader(defaultShader);
                 currentScene.update(dt);
+                currentScene.render();
             }
             this.framebuffer.unbind();
 
             this.imGuiLayer.update(dt, currentScene);
             glfwSwapBuffers(glfwWindow);
+            MouseListener.endFrame();
 
             endTime = (float)glfwGetTime();
             dt = endTime - beginTime;

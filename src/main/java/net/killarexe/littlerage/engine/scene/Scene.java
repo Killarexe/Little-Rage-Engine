@@ -1,7 +1,6 @@
 package net.killarexe.littlerage.engine.scene;
 
 import com.google.gson.*;
-import imgui.ImGui;
 import net.killarexe.littlerage.engine.gameObject.*;
 import net.killarexe.littlerage.engine.gameObject.components.Component;
 import net.killarexe.littlerage.engine.gson.*;
@@ -18,7 +17,6 @@ public abstract class Scene {
     private boolean isRunning = false;
     protected boolean loadedLevel = false;
     protected List<GameObject> gameObjects = new ArrayList<>();
-    public GameObject activeGameObject = null;
     protected Logger logger = new Logger(getClass());
 
     public Scene(){
@@ -46,19 +44,17 @@ public abstract class Scene {
         }
     }
 
+    public GameObject getGameObject(int gameObjectId){
+        Optional<GameObject> result = this.gameObjects.stream().filter(gameObject -> gameObject.getUid() == gameObjectId).findFirst();
+        return result.orElse(null);
+    }
+
     public Camera camera(){
         return this.camera;
     }
 
     public void render(){}
-    public void sceneImgui(){
-        if(activeGameObject != null){
-            ImGui.begin("Inspector");
-            activeGameObject.imgui();
-            ImGui.end();
-        }
-        imgui();
-    }
+
     public void imgui(){}
 
     public void saveExit(){
@@ -68,7 +64,7 @@ public abstract class Scene {
                 .registerTypeAdapter(GameObject.class, new GameObjectDeserialiser())
                 .create();
 
-        String fileName = "src/main/resources/data/level/level.lr";
+        String fileName = "data/level/level.lr";
         try {
             FileWriter writer = new FileWriter(fileName);
             writer.write(gson.toJson(this.gameObjects));
@@ -86,7 +82,7 @@ public abstract class Scene {
                 .create();
         String inFile = "";
         try {
-            inFile = new String(Files.readAllBytes(Paths.get("src/main/resources/data/level/level.lr")));
+            inFile = new String(Files.readAllBytes(Paths.get("data/level/level.lr")));
         }catch (IOException e){
             logger.error("Couldn't find/load the file: " + inFile);
         }
@@ -111,7 +107,7 @@ public abstract class Scene {
 
             maxGoId++;
             maxCompId++;
-            logger.debug("" + maxGoId + " GameObjects. " + maxCompId + "Components");
+            logger.debug("" + maxGoId + " GameObjects. " + maxCompId + " Components");
             GameObject.init(maxGoId);
             Component.init(maxCompId);
             this.loadedLevel = true;

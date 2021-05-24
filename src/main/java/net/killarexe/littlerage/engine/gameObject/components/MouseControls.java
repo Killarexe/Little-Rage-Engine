@@ -17,7 +17,6 @@ public class MouseControls extends Component{
     }
 
     public void place(){
-        Window.getScene().activeGameObject = holdingObject;
         this.holdingObject = null;
     }
 

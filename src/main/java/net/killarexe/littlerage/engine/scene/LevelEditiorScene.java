@@ -19,24 +19,19 @@ public class LevelEditiorScene extends Scene{
 
     @Override
     public void init() {
+        camera = new Camera(new Vector2f(-250, 0));
         levelEditorStuff.addComponents(new MouseControls());
         levelEditorStuff.addComponents(new GridLines());
+        levelEditorStuff.addComponents(new EditorCamera(this.camera));
         loadResoucres();
-        this.camera = new Camera(new Vector2f());
-        spriteSheet = AssetPool.getSpriteSheet("src\\main\\resources\\assets\\textures\\tile\\Tile1.png");
-        if(loadedLevel){
-            if(gameObjects.size() > 0) {
-                this.activeGameObject = gameObjects.get(0);
-            }
-            return;
-        }
+        spriteSheet = AssetPool.getSpriteSheet("assets\\textures\\tile\\Tile1.png");
     }
 
     private void loadResoucres(){
-        AssetPool.getShader("src\\main\\resources\\assets\\shaders\\default.glsl");
+        AssetPool.getShader("assets\\shaders\\default.glsl");
 
-        AssetPool.addSpriteSheet("src\\main\\resources\\assets\\textures\\tile\\Tile1.png",
-                new SpriteSheet(AssetPool.getTexture("src\\main\\resources\\assets\\textures\\tile\\Tile1.png"),
+        AssetPool.addSpriteSheet("assets\\textures\\tile\\Tile1.png",
+                new SpriteSheet(AssetPool.getTexture("assets\\textures\\tile\\Tile1.png"),
                         16,
                         16,
                         64,
@@ -54,13 +49,20 @@ public class LevelEditiorScene extends Scene{
 
     @Override
     public void update(float dt) {
-        logger.debug("FPS: " + (int) (1.0f / dt));
+        this.camera.adjustProjection();
+        boolean showFps = false;
+        if(showFps) {
+            logger.debug("FPS: " + (int) (1.0f / dt));
+        }
         levelEditorStuff.update(dt);
 
         for(GameObject go : this.gameObjects){
             go.update(dt);
         }
+    }
 
+    @Override
+    public void render() {
         this.renderer.render();
     }
 
