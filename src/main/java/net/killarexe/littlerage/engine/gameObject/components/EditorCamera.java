@@ -18,6 +18,8 @@ public class EditorCamera extends Component{
     private float dragSensitivity = 30f;
     private float scrollSensitivity = 0.1f;
 
+    private int fps;
+
     private boolean isReset = false;
 
     public EditorCamera(Camera levelEditorCamera){
@@ -27,6 +29,7 @@ public class EditorCamera extends Component{
 
     @Override
     public void update(float dt) {
+        fps = (int)(1.0f / dt);
         if(MouseListener.mouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT) && dragDebounce > 0){
             this.clickOrigin = new Vector2f(MouseListener.getOrthoX(), MouseListener.getOrthoY());
             dragDebounce -= dt;

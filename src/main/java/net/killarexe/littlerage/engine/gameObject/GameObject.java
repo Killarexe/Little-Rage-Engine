@@ -15,6 +15,8 @@ public class GameObject {
     public Transform transform;
     private int zIndex;
 
+    private boolean doSerialization = true;
+
     transient Logger logger = new Logger(getClass());
 
     public GameObject(String name, Transform transform, int zIndex){
@@ -67,23 +69,21 @@ public class GameObject {
         }
     }
 
-    public int getzIndex(){
-        return this.zIndex;
+    public static void init(int maxId){
+        ID_COUNTER = maxId;
     }
-    
+
     public void imgui(){
         for(Component c: components){
             c.imgui();
         }
     }
 
-    public List<Component> getAllComponents(){
-        return this.components;
-    }
+    public void setDoSerialization(boolean val){ this.doSerialization = val; }
 
-    public static void init(int maxId){
-        ID_COUNTER = maxId;
-    }
-
+    public int getzIndex(){ return this.zIndex; }
+    public List<Component> getAllComponents(){ return this.components; }
     public int getUid(){return this.uid;}
+
+    public boolean isDoSerialization() { return this.doSerialization; }
 }

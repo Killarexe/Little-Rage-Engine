@@ -61,7 +61,7 @@ public abstract class Component {
                     Vector2f val = (Vector2f)value;
                     float[] imVec = {val.x , val.y};
                     if(ImGui.dragFloat2(name + ": ", imVec)){
-                        field.set(imVec[0], imVec[1]);
+                        val.set(imVec[0], imVec[1]);
                     }
                 }else if(type == Vector3f.class){
                     Vector3f val = (Vector3f)value;

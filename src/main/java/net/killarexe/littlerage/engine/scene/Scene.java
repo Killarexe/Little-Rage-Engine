@@ -67,7 +67,14 @@ public abstract class Scene {
         String fileName = "data/level/level.lr";
         try {
             FileWriter writer = new FileWriter(fileName);
-            writer.write(gson.toJson(this.gameObjects));
+            List<GameObject> objectsToSer = new ArrayList();
+            for(GameObject object: this.gameObjects){
+                if(object.isDoSerialization()){
+                    objectsToSer.add(object);
+                }
+            }
+
+            writer.write(gson.toJson(objectsToSer));
             writer.close();
         }catch (IOException e){
             logger.error("Couldn't write the file: " + fileName);

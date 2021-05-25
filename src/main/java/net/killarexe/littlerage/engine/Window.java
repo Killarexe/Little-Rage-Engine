@@ -208,4 +208,5 @@ public class Window {
     public static Framebuffer getFramebuffer(){return getInstance().framebuffer;}
     public static float getTargetAspect169(){return 16.0f / 9.0f;}
     public static float getTargetAspect1610(){return 16.0f / 10.0f;}
+    public static ImGuiLayer getImGuiLayer(){return getInstance().imGuiLayer;}
 }

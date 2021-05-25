@@ -4,6 +4,7 @@ import net.killarexe.littlerage.engine.Window;
 import net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer;
 import net.killarexe.littlerage.engine.util.AssetPool;
 import net.killarexe.littlerage.engine.util.Logger;
+import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
@@ -176,6 +177,14 @@ public class RenderBatch implements Comparable<RenderBatch>{
             }
         }
 
+        boolean isRotated = spriteRenderer.gameObject.transform.rotation != 0f;
+        Matrix4f transformMatrix = new Matrix4f().identity();
+        if(isRotated){
+            transformMatrix.translate(spriteRenderer.gameObject.transform.pos.x, spriteRenderer.gameObject.transform.pos.y, 0f);
+            transformMatrix.rotate((float)Math.toRadians(spriteRenderer.gameObject.transform.rotation), 0, 0 ,1);
+            transformMatrix.scale(spriteRenderer.gameObject.transform.scale.x, spriteRenderer.gameObject.transform.scale.y, 1);
+        }
+
         //Add vertices with the appropriate properties
         float xAdd = 1.0f;
         float yAdd = 1.0f;
@@ -189,9 +198,16 @@ public class RenderBatch implements Comparable<RenderBatch>{
                 yAdd = 1.0f;
             }
 
+            Vector4f currentPos = new Vector4f(spriteRenderer.gameObject.transform.pos.x + (xAdd * spriteRenderer.gameObject.transform.scale.x),
+                    spriteRenderer.gameObject.transform.pos.y + (yAdd * spriteRenderer.gameObject.transform.scale.y), 0, 1);
+
+            if(isRotated){
+                currentPos = new Vector4f(xAdd, yAdd, 0, 1).mul(transformMatrix);
+            }
+
             //Load pos
-            vertices[offset] = spriteRenderer.gameObject.transform.pos.x + (xAdd * spriteRenderer.gameObject.transform.scale.x);
-            vertices[offset + 1] = spriteRenderer.gameObject.transform.pos.y + (yAdd * spriteRenderer.gameObject.transform.scale.y);
+            vertices[offset] = currentPos.x;
+            vertices[offset + 1] = currentPos.y;
 
             //load color
             vertices[offset + 2] = color.x;

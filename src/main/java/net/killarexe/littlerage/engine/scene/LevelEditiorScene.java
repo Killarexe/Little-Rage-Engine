@@ -2,6 +2,7 @@ package net.killarexe.littlerage.engine.scene;
 
 import imgui.ImGui;
 import imgui.ImVec2;
+import net.killarexe.littlerage.engine.Window;
 import net.killarexe.littlerage.engine.gameObject.*;
 import net.killarexe.littlerage.engine.gameObject.components.*;
 import net.killarexe.littlerage.engine.renderer.Sprite;
@@ -19,12 +20,15 @@ public class LevelEditiorScene extends Scene{
 
     @Override
     public void init() {
+        loadResoucres();
+        spriteSheet = AssetPool.getSpriteSheet("assets\\textures\\tile\\Tile1.png");
+        SpriteSheet gizmos = AssetPool.getSpriteSheet("assets\\textures\\gui\\gizmos.png");
         camera = new Camera(new Vector2f(-250, 0));
         levelEditorStuff.addComponents(new MouseControls());
         levelEditorStuff.addComponents(new GridLines());
         levelEditorStuff.addComponents(new EditorCamera(this.camera));
-        loadResoucres();
-        spriteSheet = AssetPool.getSpriteSheet("assets\\textures\\tile\\Tile1.png");
+        levelEditorStuff.addComponents(new TranslateGizmo(gizmos.getSprite(1), Window.getImGuiLayer().getPropertiesWindow()));
+        levelEditorStuff.start();
     }
 
     private void loadResoucres(){
@@ -32,10 +36,11 @@ public class LevelEditiorScene extends Scene{
 
         AssetPool.addSpriteSheet("assets\\textures\\tile\\Tile1.png",
                 new SpriteSheet(AssetPool.getTexture("assets\\textures\\tile\\Tile1.png"),
-                        16,
-                        16,
-                        64,
-                        0));
+                        16, 16, 64, 0));
+
+        AssetPool.addSpriteSheet("assets\\textures\\gui\\gizmos.png",
+                new SpriteSheet(AssetPool.getTexture("assets\\textures\\gui\\gizmos.png"),
+                24, 48, 2, 0));
 
         for (GameObject g: gameObjects){
             if(g.getComponents(SpriteRenderer.class) != null){
@@ -50,10 +55,6 @@ public class LevelEditiorScene extends Scene{
     @Override
     public void update(float dt) {
         this.camera.adjustProjection();
-        boolean showFps = false;
-        if(showFps) {
-            logger.debug("FPS: " + (int) (1.0f / dt));
-        }
         levelEditorStuff.update(dt);
 
         for(GameObject go : this.gameObjects){
@@ -68,6 +69,10 @@ public class LevelEditiorScene extends Scene{
 
     @Override
     public void imgui() {
+        ImGui.begin("Editor Debug");
+        levelEditorStuff.imgui();
+        ImGui.end();
+
         ImGui.begin("Tile Palette");
 
         ImVec2 windowPos = new ImVec2(10f, 10f);
