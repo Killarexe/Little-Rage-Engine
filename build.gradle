@@ -25,6 +25,9 @@ dependencyManagement {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
+    //DISCORD RPC
+    compile 'club.minnced:java-discord-rpc:2.0.1'
+
     //GSON
     implementation 'com.google.code.gson:gson:2.8.6'
 

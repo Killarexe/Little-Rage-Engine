@@ -1,8 +1,8 @@
 package net.killarexe.littlerage.engine.gameObject.components;
 
 import net.killarexe.littlerage.engine.gameObject.Camera;
-import net.killarexe.littlerage.engine.input.KeyListener;
-import net.killarexe.littlerage.engine.input.MouseListener;
+import static net.killarexe.littlerage.engine.input.KeyListener.*;
+import static net.killarexe.littlerage.engine.input.MouseListener.*;
 import org.joml.Vector2f;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -30,28 +30,28 @@ public class EditorCamera extends Component{
     @Override
     public void update(float dt) {
         fps = (int)(1.0f / dt);
-        if(MouseListener.mouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT) && dragDebounce > 0){
-            this.clickOrigin = new Vector2f(MouseListener.getOrthoX(), MouseListener.getOrthoY());
+        if(mouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT) && dragDebounce > 0){
+            this.clickOrigin = new Vector2f(getOrthoX(), getOrthoY());
             dragDebounce -= dt;
             return;
-        }else if(MouseListener.mouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT)){
-            Vector2f mousePos = new Vector2f(MouseListener.getOrthoX(), MouseListener.getOrthoY());
+        }else if(mouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT)){
+            Vector2f mousePos = new Vector2f(getOrthoX(), getOrthoY());
             Vector2f delta = new Vector2f(mousePos).sub(this.clickOrigin);
             levelEditorCamera.pos.sub(delta.mul(dt).mul(dragSensitivity));
             this.clickOrigin.lerp(mousePos, dt);
         }
 
-        if(dragDebounce <= 0.0f && !MouseListener.mouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT)){
+        if(dragDebounce <= 0.0f && !mouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT)){
             dragDebounce = 0.1f;
         }
 
-        if(MouseListener.getScrollY() != 0.0f){
-            float addValue = (float)Math.pow(Math.abs(MouseListener.getScrollY()) * scrollSensitivity, 1 / levelEditorCamera.getZoom());
-            addValue *= Math.signum(MouseListener.getScrollY());
+        if(getScrollY() != 0.0f){
+            float addValue = (float)Math.pow(Math.abs(getScrollY()) * scrollSensitivity, 1 / levelEditorCamera.getZoom());
+            addValue *= Math.signum(getScrollY());
             levelEditorCamera.addZoom(addValue);
         }
 
-        if(KeyListener.isKeyPressed(GLFW_KEY_F5)){
+        if(isKeyPressed(GLFW_KEY_F5)){
             isReset = true;
         }
 

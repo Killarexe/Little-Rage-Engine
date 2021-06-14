@@ -1,7 +1,7 @@
 package net.killarexe.littlerage.engine.gameObject.components;
 
 import imgui.ImGui;
-import net.killarexe.littlerage.engine.gameObject.Transform;
+import net.killarexe.littlerage.engine.editor.LRImGui;
 import net.killarexe.littlerage.engine.renderer.Sprite;
 import net.killarexe.littlerage.engine.renderer.Texture;
 import org.joml.Vector2f;
@@ -60,9 +60,7 @@ public class SpriteRenderer extends Component{
 
     @Override
     public void imgui() {
-        float[] imColor = {color.x, color.y, color.z, color.w};
-        if(ImGui.colorPicker4("Color Picker: ", imColor)){
-            this.color.set(imColor[0], imColor[1], imColor[2], imColor[3]);
+        if(LRImGui.colorPicker4("Color Picker", this.color)){
             this.isDirty = true;
         }
         super.imgui();

@@ -3,6 +3,7 @@ package net.killarexe.littlerage.engine.scene;
 import com.google.gson.*;
 import net.killarexe.littlerage.engine.gameObject.*;
 import net.killarexe.littlerage.engine.gameObject.components.Component;
+import net.killarexe.littlerage.engine.gameObject.components.Transform;
 import net.killarexe.littlerage.engine.gson.*;
 import net.killarexe.littlerage.engine.renderer.Renderer;
 import net.killarexe.littlerage.engine.util.Logger;
@@ -56,6 +57,13 @@ public abstract class Scene {
     public void render(){}
 
     public void imgui(){}
+
+    public GameObject createGameObject(String name){
+        GameObject gameObject = new GameObject(name);
+        gameObject.addComponents(new Transform());
+        gameObject.transform = gameObject.getComponents(Transform.class);
+        return gameObject;
+    }
 
     public void saveExit(){
         Gson gson = new GsonBuilder()

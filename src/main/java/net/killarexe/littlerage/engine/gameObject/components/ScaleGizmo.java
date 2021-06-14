@@ -1,24 +1,22 @@
 package net.killarexe.littlerage.engine.gameObject.components;
 
 import net.killarexe.littlerage.engine.editor.PropertiesWindow;
-import static net.killarexe.littlerage.engine.input.MouseListener.*;
-
 import net.killarexe.littlerage.engine.input.MouseListener;
 import net.killarexe.littlerage.engine.renderer.Sprite;
 
-public class TranslateGizmo extends Gizmo{
+public class ScaleGizmo extends Gizmo{
 
-    public TranslateGizmo(Sprite arrowSprite, PropertiesWindow propertiesWindow) {
-        super(arrowSprite, propertiesWindow);
+    public ScaleGizmo(Sprite scaleSprite, PropertiesWindow propertiesWindow) {
+        super(scaleSprite, propertiesWindow);
     }
 
     @Override
     public void update(float dt) {
         if (activeGameObject != null) {
             if (xAxisActive && !yAxisActive) {
-                activeGameObject.transform.pos.x -= MouseListener.getWorldDx();
+                activeGameObject.transform.scale.x -= MouseListener.getWorldDx();
             } else if (yAxisActive) {
-                activeGameObject.transform.pos.y -= MouseListener.getWorldDy();
+                activeGameObject.transform.scale.y -= MouseListener.getWorldDy();
             }
         }
 

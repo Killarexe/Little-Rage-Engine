@@ -2,7 +2,7 @@ package net.killarexe.littlerage.engine.gson;
 
 import com.google.gson.*;
 import net.killarexe.littlerage.engine.gameObject.GameObject;
-import net.killarexe.littlerage.engine.gameObject.Transform;
+import net.killarexe.littlerage.engine.gameObject.components.Transform;
 import net.killarexe.littlerage.engine.gameObject.components.Component;
 
 import java.lang.reflect.Type;
@@ -14,14 +14,13 @@ public class GameObjectDeserialiser implements JsonDeserializer<GameObject> {
         JsonObject jsonObject = json.getAsJsonObject();
         String name = jsonObject.get("name").getAsString();
         JsonArray components = jsonObject.getAsJsonArray("components");
-        Transform transform = context.deserialize(jsonObject.get("transform"), Transform.class);
-        int zIndex = context.deserialize(jsonObject.get("zIndex"), int.class);
 
-        GameObject gameObject = new GameObject(name, transform, zIndex);
+        GameObject gameObject = new GameObject(name);
         for(JsonElement e: components){
             Component c = context.deserialize(e, Component.class);
             gameObject.addComponents(c);
         }
+        gameObject.transform = gameObject.getComponents(Transform.class);
         return gameObject;
     }
 }

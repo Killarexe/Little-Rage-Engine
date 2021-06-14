@@ -1,6 +1,6 @@
 package net.killarexe.littlerage.engine.physics2d.rigidbody;
 
-import net.killarexe.littlerage.engine.gameObject.Transform;
+import net.killarexe.littlerage.engine.gameObject.components.Transform;
 import net.killarexe.littlerage.engine.gameObject.components.Component;
 import org.joml.Vector2f;
 

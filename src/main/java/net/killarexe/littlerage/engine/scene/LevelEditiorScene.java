@@ -12,7 +12,7 @@ import org.joml.Vector2f;
 
 public class LevelEditiorScene extends Scene{
     private SpriteSheet spriteSheet;
-    private GameObject levelEditorStuff = new GameObject("LevelEditor", new Transform(new Vector2f()), 0);
+    private GameObject levelEditorStuff = this.createGameObject("LevelEditorStuff");
 
     public LevelEditiorScene(){
         logger.info("Changing to LevelEditior Scene");
@@ -27,7 +27,7 @@ public class LevelEditiorScene extends Scene{
         levelEditorStuff.addComponents(new MouseControls());
         levelEditorStuff.addComponents(new GridLines());
         levelEditorStuff.addComponents(new EditorCamera(this.camera));
-        levelEditorStuff.addComponents(new TranslateGizmo(gizmos.getSprite(1), Window.getImGuiLayer().getPropertiesWindow()));
+        levelEditorStuff.addComponents(new GizmoSystem(gizmos));
         levelEditorStuff.start();
     }
 
@@ -40,7 +40,7 @@ public class LevelEditiorScene extends Scene{
 
         AssetPool.addSpriteSheet("assets\\textures\\gui\\gizmos.png",
                 new SpriteSheet(AssetPool.getTexture("assets\\textures\\gui\\gizmos.png"),
-                24, 48, 2, 0));
+                24, 48, 3, 0));
 
         for (GameObject g: gameObjects){
             if(g.getComponents(SpriteRenderer.class) != null){

@@ -25,18 +25,18 @@ public class Window {
     private int width, height;
     private long glfwWindow;
     private String title;
-    private String VER;
+    private String VER = "0.1a";
     private ImGuiLayer imGuiLayer;
     private Framebuffer framebuffer;
     private PickingTexture pickingTexture;
+    private DiscordController controller = new DiscordController("Playing Little Rage Maker v" + VER, "Editing...", null, null, "848548611423207446", null);;
 
     private static Logger LOGGER = new Logger(Window.class);
-    Logger logger = LOGGER;
+    private Logger logger = LOGGER;
 
     private Window(){
         this.width = 1680;
         this.height = 1050;
-        this.VER = "0.1a";
         this.title = "Little Rage " + this.VER;
         r = 1;
         b = 1;
@@ -122,6 +122,7 @@ public class Window {
         Shader pickingShader = AssetPool.getShader("assets/shaders/pickingShader.glsl");
 
         while(!glfwWindowShouldClose(glfwWindow)){
+
             //Poll Events
             glfwPollEvents();
 
@@ -161,7 +162,9 @@ public class Window {
             dt = endTime - beginTime;
             beginTime = endTime;
         }
+        controller.stop();
         currentScene.saveExit();
+        System.exit(0);
     }
 
     public static void changeScene(int newScene){
@@ -209,4 +212,5 @@ public class Window {
     public static float getTargetAspect169(){return 16.0f / 9.0f;}
     public static float getTargetAspect1610(){return 16.0f / 10.0f;}
     public static ImGuiLayer getImGuiLayer(){return getInstance().imGuiLayer;}
+    public static DiscordController getController() { return getInstance().controller; }
 }

@@ -9,8 +9,8 @@ import imgui.type.ImBoolean;
 import net.killarexe.littlerage.engine.Window;
 import net.killarexe.littlerage.engine.editor.GameViewWindow;
 import net.killarexe.littlerage.engine.editor.PropertiesWindow;
-import net.killarexe.littlerage.engine.input.KeyListener;
-import net.killarexe.littlerage.engine.input.MouseListener;
+import static net.killarexe.littlerage.engine.input.KeyListener.*;
+import static net.killarexe.littlerage.engine.input.MouseListener.*;
 import net.killarexe.littlerage.engine.renderer.PickingTexture;
 import net.killarexe.littlerage.engine.scene.Scene;
 
@@ -106,7 +106,7 @@ public class ImGuiLayer {
             io.setKeySuper(io.getKeysDown(GLFW_KEY_LEFT_SUPER) || io.getKeysDown(GLFW_KEY_RIGHT_SUPER));
 
             if(!io.getWantCaptureKeyboard()){
-                KeyListener.keyCallback(w, key, scancode, action, mods);
+                keyCallback(w, key, scancode, action, mods);
             }
         });
 
@@ -132,14 +132,14 @@ public class ImGuiLayer {
             }
 
             if(!io.getWantCaptureMouse() || viewWindow.getWantCaptureMouse()){
-                MouseListener.mouseButtonCallback(w, button, action, mods);
+                mouseButtonCallback(w, button, action, mods);
             }
         });
 
         glfwSetScrollCallback(glfwWindow, (w, xOffset, yOffset) -> {
             io.setMouseWheelH(io.getMouseWheelH() + (float) xOffset);
             io.setMouseWheel(io.getMouseWheel() + (float) yOffset);
-            MouseListener.mouseScrollCallback(w, xOffset, yOffset);
+            mouseScrollCallback(w, xOffset, yOffset);
         });
 
         io.setSetClipboardTextFn(new ImStrConsumer() {

@@ -1,14 +1,14 @@
-package net.killarexe.littlerage.engine.gameObject;
+package net.killarexe.littlerage.engine.gameObject.components;
 
+import net.killarexe.littlerage.engine.editor.LRImGui;
 import org.joml.Vector2f;
 
-import java.util.Objects;
-
-public class Transform {
+public class Transform extends Component{
 
     public Vector2f pos;
     public Vector2f scale;
     public float rotation = 0f;
+    public int zIndex;
 
     public Transform(){
         init(new Vector2f(), new Vector2f());
@@ -25,6 +25,7 @@ public class Transform {
     public void init(Vector2f pos, Vector2f scale){
         this.pos = pos;
         this.scale = scale;
+        this.zIndex = 0;
     }
 
     public Transform copy(){
@@ -42,6 +43,9 @@ public class Transform {
         if(!(o instanceof Transform)) return false;
 
         Transform transform = (Transform)o;
-        return transform.pos.equals(this.pos) && transform.scale.equals(this.scale);
+        return transform.pos.equals(this.pos)
+                && transform.scale.equals(this.scale)
+                && transform.rotation == this.rotation
+                && transform.zIndex == this.zIndex;
     }
 }

@@ -1,6 +1,8 @@
 package net.killarexe.littlerage.engine.gameObject;
 
+import imgui.ImGui;
 import net.killarexe.littlerage.engine.gameObject.components.Component;
+import net.killarexe.littlerage.engine.gameObject.components.Transform;
 import net.killarexe.littlerage.engine.util.Logger;
 
 import java.util.ArrayList;
@@ -13,17 +15,14 @@ public class GameObject {
     private String name;
     private List<Component> components;
     public Transform transform;
-    private int zIndex;
 
     private boolean doSerialization = true;
 
     transient Logger logger = new Logger(getClass());
 
-    public GameObject(String name, Transform transform, int zIndex){
+    public GameObject(String name){
         this.name = name;
         this.components = new ArrayList<>();
-        this.transform = transform;
-        this.zIndex = zIndex;
         this.uid = ID_COUNTER++;
     }
 
@@ -75,13 +74,14 @@ public class GameObject {
 
     public void imgui(){
         for(Component c: components){
-            c.imgui();
+            if(ImGui.collapsingHeader(c.getClass().getSimpleName())) {
+                c.imgui();
+            }
         }
     }
 
     public void setDoSerialization(boolean val){ this.doSerialization = val; }
 
-    public int getzIndex(){ return this.zIndex; }
     public List<Component> getAllComponents(){ return this.components; }
     public int getUid(){return this.uid;}
 
