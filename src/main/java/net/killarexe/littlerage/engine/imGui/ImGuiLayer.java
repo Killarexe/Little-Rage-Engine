@@ -7,10 +7,10 @@ import imgui.flag.*;
 import imgui.gl3.*;
 import imgui.type.ImBoolean;
 import net.killarexe.littlerage.engine.Window;
-import net.killarexe.littlerage.engine.editor.GameViewWindow;
-import net.killarexe.littlerage.engine.editor.PropertiesWindow;
+
 import static net.killarexe.littlerage.engine.input.KeyListener.*;
 import static net.killarexe.littlerage.engine.input.MouseListener.*;
+
 import net.killarexe.littlerage.engine.renderer.PickingTexture;
 import net.killarexe.littlerage.engine.scene.Scene;
 
@@ -28,11 +28,13 @@ public class ImGuiLayer {
 
     private GameViewWindow viewWindow;
     private PropertiesWindow propertiesWindow;
+    private MenuBar bar;
 
     public ImGuiLayer(long glfwWindow, PickingTexture pickingTexture){
         this.glfwWindow = glfwWindow;
         this.viewWindow = new GameViewWindow();
         this.propertiesWindow = new PropertiesWindow(pickingTexture);
+        this.bar = new MenuBar();
     }
 
     // Initialize Dear ImGui.
@@ -191,9 +193,10 @@ public class ImGuiLayer {
         setupDockspace();
         scene.imgui();
         ImGui.showDemoWindow();
+        viewWindow.imgui();
         propertiesWindow.update(dt, scene);
         propertiesWindow.imgui();
-        viewWindow.imgui();
+        bar.imgui();
         ImGui.end();
         ImGui.render();
 

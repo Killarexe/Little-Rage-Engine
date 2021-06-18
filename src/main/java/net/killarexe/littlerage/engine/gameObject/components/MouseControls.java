@@ -21,7 +21,7 @@ public class MouseControls extends Component{
     }
 
     @Override
-    public void update(float dt) {
+    public void editorUpdate(float dt) {
         if(holdingObject != null){
             holdingObject.transform.pos.x = getOrthoX() - 48;
             holdingObject.transform.pos.y = getOrthoY() - 16;

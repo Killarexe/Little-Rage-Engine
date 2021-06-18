@@ -17,6 +17,7 @@ public class GameObject {
     public Transform transform;
 
     private boolean doSerialization = true;
+    private boolean isDead = false;
 
     transient Logger logger = new Logger(getClass());
 
@@ -61,6 +62,11 @@ public class GameObject {
             components.get(i).update(dt);
         }
     }
+    public void editorUpdate(float dt){
+        for(int i=0; i < components.size(); i++){
+            components.get(i).editorUpdate(dt);
+        }
+    }
 
     public void start(){
         for(int i=0; i < components.size(); i++){
@@ -70,6 +76,13 @@ public class GameObject {
 
     public static void init(int maxId){
         ID_COUNTER = maxId;
+    }
+
+    public void destroy(){
+        this.isDead = true;
+        for (int i = 0; i < components.size(); i++) {
+            components.get(i).destroy();
+        }
     }
 
     public void imgui(){
@@ -84,6 +97,6 @@ public class GameObject {
 
     public List<Component> getAllComponents(){ return this.components; }
     public int getUid(){return this.uid;}
-
     public boolean isDoSerialization() { return this.doSerialization; }
+    public boolean isDead() { return isDead; }
 }

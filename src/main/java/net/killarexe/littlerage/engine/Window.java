@@ -1,27 +1,27 @@
 package net.killarexe.littlerage.engine;
 
-import net.killarexe.littlerage.engine.editor.GameViewWindow;
+import net.killarexe.littlerage.engine.gameObject.GameObject;
 import net.killarexe.littlerage.engine.imGui.ImGuiLayer;
 import net.killarexe.littlerage.engine.input.*;
+import net.killarexe.littlerage.engine.observers.*;
+import net.killarexe.littlerage.engine.observers.events.*;
 import net.killarexe.littlerage.engine.renderer.*;
 import net.killarexe.littlerage.engine.scene.*;
 import net.killarexe.littlerage.engine.util.*;
-import net.killarexe.littlerage.scene.LevelScene;
 import org.lwjgl.Version;
 import static org.lwjgl.system.MemoryUtil.NULL;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.opengl.GL;
 
-public class Window {
+public class Window implements Observer {
 
     private static int currentSceneIndex = -1;
     private static Window window = null;
     private static Scene currentScene;
-    public float r, g, b, a;
+    //public float r, g, b, a;
     private int width, height;
     private long glfwWindow;
     private String title;
@@ -34,14 +34,14 @@ public class Window {
     private static Logger LOGGER = new Logger(Window.class);
     private Logger logger = LOGGER;
 
+    private boolean runtimePlaying = false;
+
     private Window(){
         this.width = 1680;
         this.height = 1050;
-        this.title = "Little Rage " + this.VER;
-        r = 1;
-        b = 1;
-        g = 1;
-        a = 1;
+        this.title = "Little Rage Engine v" + this.VER;
+
+        EventSystem.addObserver(this);
     }
 
     public static Window getInstance(){
@@ -56,7 +56,7 @@ public class Window {
         LOGGER.info("Running Little Rage " + this.VER);
         LOGGER.info("Running With LWJGL" + Version.getVersion());
         init();
-        LOGGER.info("Little Rage Initialized!");
+        LOGGER.info("Little Rage Engine v" + this.VER + " Initialized!");
         loop();
 
         stop();
@@ -110,10 +110,11 @@ public class Window {
         this.imGuiLayer = new ImGuiLayer(glfwWindow, pickingTexture);
         this.imGuiLayer.initImGui();
 
-        Window.changeScene(0);
+        Window.changeScene(new LevelEditiorSceneInitializer());
     }
 
     public void loop(){
+
         float beginTime = (float)glfwGetTime();
         float endTime;
         float dt = -1.0f;
@@ -143,13 +144,17 @@ public class Window {
             DebugDraw.beginFrame();
 
             this.framebuffer.bind();
-            glClearColor(r, g, b, a);
+            glClearColor(1, 1, 1, 1);
             glClear(GL_COLOR_BUFFER_BIT);
 
             if(dt >= 0){
                 DebugDraw.draw();
                 Renderer.bindShader(defaultShader);
-                currentScene.update(dt);
+                if(runtimePlaying) {
+                    currentScene.update(dt);
+                }else{
+                    currentScene.editorUpdate(dt);
+                }
                 currentScene.render();
             }
             this.framebuffer.unbind();
@@ -163,23 +168,18 @@ public class Window {
             beginTime = endTime;
         }
         controller.stop();
-        currentScene.saveExit();
+        currentScene.save();
         System.exit(0);
     }
 
-    public static void changeScene(int newScene){
-        switch (newScene){
-            case 0:
-                currentScene = new LevelEditiorScene();
-                break;
-            case 1:
-                currentScene = new LevelScene();
-                break;
-            default:
-                LOGGER.fatal("Unknown Scene: " + newScene);
-                break;
+    public static void changeScene(SceneInitializer initializer){
+
+        if(currentScene != null){
+            currentScene.destroy();
         }
 
+        getImGuiLayer().getPropertiesWindow().setActiveGameObject(null);
+        currentScene = new Scene(initializer);
         currentScene.load();
         currentScene.init();
         currentScene.start();
@@ -195,14 +195,40 @@ public class Window {
         glfwSetErrorCallback(null).free();
     }
 
+    @Override
+    public void onNotify(GameObject object, Event event) {
+        switch (event.type){
+            case GameEngineStartPlay:
+                logger.info("Start Playing!");
+                this.runtimePlaying = true;
+                currentScene.save();
+                changeScene(new LevelEditiorSceneInitializer());
+                break;
+            case GameEngineStopPlay:
+                logger.info("Stop Playing!");
+                this.runtimePlaying = false;
+                Window.changeScene(new LevelEditiorSceneInitializer());
+                break;
+            case UserEvent:
+                break;
+            case LoadLevel:
+                changeScene(new LevelEditiorSceneInitializer());
+                break;
+            case SaveLevel:
+                currentScene.save();
+                break;
+        }
+    }
+
+    //Setters
     public static void setWidth(int newWidth){
         getInstance().width = newWidth;
     }
-
     public static void setHeight(int newHeight){
         getInstance().height = newHeight;
     }
 
+    //Getters
     public static Scene getScene(){
         return getInstance().currentScene;
     }

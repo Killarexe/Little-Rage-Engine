@@ -1,7 +1,7 @@
 package net.killarexe.littlerage.engine.gameObject.components;
 
 import net.killarexe.littlerage.engine.Window;
-import net.killarexe.littlerage.engine.editor.PropertiesWindow;
+import net.killarexe.littlerage.engine.imGui.PropertiesWindow;
 import net.killarexe.littlerage.engine.gameObject.GameObject;
 import net.killarexe.littlerage.engine.gameObject.Prefabs;
 import net.killarexe.littlerage.engine.input.MouseListener;
@@ -61,6 +61,13 @@ public class Gizmo extends Component{
 
     @Override
     public void update(float dt) {
+        if(using){
+            this.setInactive();
+        }
+    }
+
+    @Override
+    public void editorUpdate(float dt) {
         if (!using) return;
 
         this.activeGameObject = this.propertiesWindow.getActiveGameObject();

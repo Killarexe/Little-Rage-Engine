@@ -1,7 +1,6 @@
 package net.killarexe.littlerage.engine.gameObject.components;
 
-import imgui.ImGui;
-import net.killarexe.littlerage.engine.editor.LRImGui;
+import net.killarexe.littlerage.engine.imGui.LRImGui;
 import net.killarexe.littlerage.engine.renderer.Sprite;
 import net.killarexe.littlerage.engine.renderer.Texture;
 import org.joml.Vector2f;
@@ -22,6 +21,14 @@ public class SpriteRenderer extends Component{
 
     @Override
     public void update(float dt) {
+        if(!this.lastTransform.equals(this.gameObject.transform)){
+            this.gameObject.transform.copy(this.lastTransform);
+            isDirty = true;
+        }
+    }
+
+    @Override
+    public void editorUpdate(float dt) {
         if(!this.lastTransform.equals(this.gameObject.transform)){
             this.gameObject.transform.copy(this.lastTransform);
             isDirty = true;
@@ -54,8 +61,8 @@ public class SpriteRenderer extends Component{
         }
     }
 
-    public void setClean(){
-        this.isDirty = false;
+    public void setDirty(boolean val){
+        this.isDirty = val;
     }
 
     @Override

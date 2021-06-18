@@ -1,6 +1,5 @@
 package net.killarexe.littlerage.engine.gameObject.components;
 
-import net.killarexe.littlerage.engine.editor.LRImGui;
 import org.joml.Vector2f;
 
 public class Transform extends Component{

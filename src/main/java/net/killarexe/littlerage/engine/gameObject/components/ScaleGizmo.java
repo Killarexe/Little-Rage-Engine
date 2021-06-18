@@ -1,6 +1,6 @@
 package net.killarexe.littlerage.engine.gameObject.components;
 
-import net.killarexe.littlerage.engine.editor.PropertiesWindow;
+import net.killarexe.littlerage.engine.imGui.PropertiesWindow;
 import net.killarexe.littlerage.engine.input.MouseListener;
 import net.killarexe.littlerage.engine.renderer.Sprite;
 
@@ -11,7 +11,7 @@ public class ScaleGizmo extends Gizmo{
     }
 
     @Override
-    public void update(float dt) {
+    public void editorUpdate(float dt) {
         if (activeGameObject != null) {
             if (xAxisActive && !yAxisActive) {
                 activeGameObject.transform.scale.x -= MouseListener.getWorldDx();
@@ -20,6 +20,6 @@ public class ScaleGizmo extends Gizmo{
             }
         }
 
-        super.update(dt);
+        super.editorUpdate(dt);
     }
 }

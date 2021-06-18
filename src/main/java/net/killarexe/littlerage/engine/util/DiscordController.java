@@ -41,7 +41,7 @@ public class DiscordController {
         rpc.Discord_UpdatePresence(presence);
         logger.info("Discord RPC started:\n" +
                 " Settings:\n" +
-                " details:" + details + " state: " + state + " largeImageText: " + largeImageText + " smallImageText: " + smallImageText);
+                " details:" + details + "\n state: " + state + "\n largeImageText: " + largeImageText + "\n smallImageText: " + smallImageText);
 
         Thread thread = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {

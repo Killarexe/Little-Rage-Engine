@@ -1,7 +1,7 @@
 package net.killarexe.littlerage.engine.gameObject.components;
 
 import imgui.ImGui;
-import net.killarexe.littlerage.engine.editor.LRImGui;
+import net.killarexe.littlerage.engine.imGui.LRImGui;
 import net.killarexe.littlerage.engine.gameObject.GameObject;
 import net.killarexe.littlerage.engine.util.Logger;
 import org.joml.Vector2f;
@@ -10,7 +10,6 @@ import org.joml.Vector4f;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.List;
 
 public abstract class Component {
 
@@ -21,6 +20,7 @@ public abstract class Component {
     protected transient Logger logger = new Logger(getClass());
 
     public void update(float dt){}
+    public void editorUpdate(float dt){}
     public void start(){}
     public void imgui(){
         try {
@@ -79,6 +79,10 @@ public abstract class Component {
         if(this.uid == -1){
             this.uid = ID_COUNTER++;
         }
+    }
+
+    public void destroy(){
+
     }
 
     public static void init(int maxId){

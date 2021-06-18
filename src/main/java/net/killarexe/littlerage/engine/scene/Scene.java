@@ -2,35 +2,76 @@ package net.killarexe.littlerage.engine.scene;
 
 import com.google.gson.*;
 import net.killarexe.littlerage.engine.gameObject.*;
-import net.killarexe.littlerage.engine.gameObject.components.Component;
-import net.killarexe.littlerage.engine.gameObject.components.Transform;
+import net.killarexe.littlerage.engine.gameObject.components.*;
 import net.killarexe.littlerage.engine.gson.*;
+import net.killarexe.littlerage.engine.physics2d.Physics2D;
 import net.killarexe.littlerage.engine.renderer.Renderer;
 import net.killarexe.littlerage.engine.util.Logger;
+import org.joml.Vector2f;
+
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
-public abstract class Scene {
+public class Scene {
 
-    protected Renderer renderer = new Renderer();
-    protected Camera camera;
-    private boolean isRunning = false;
-    protected boolean loadedLevel = false;
-    protected List<GameObject> gameObjects = new ArrayList<>();
-    protected Logger logger = new Logger(getClass());
+    private Renderer renderer;
+    private Camera camera;
+    private boolean isRunning;
+    private List<GameObject> gameObjects;
+    private Logger logger = new Logger(getClass());
+    private SceneInitializer initializer;
+    private Physics2D physics2D;
 
-    public Scene(){
-
+    public Scene(SceneInitializer initializer){
+        this.initializer = initializer;
+        this.physics2D = new Physics2D();
+        this.renderer = new Renderer();
+        this.gameObjects = new ArrayList<>();
+        this.isRunning = false;
     }
 
-    public abstract void update(float dt);
-    public void init(){}
+    public void editorUpdate(float dt){
+        this.camera.adjustProjection();
+        for (int i = 0; i < gameObjects.size(); i++) {
+            gameObjects.get(i).editorUpdate(dt);
+
+            if(gameObjects.get(i).isDead()){
+                gameObjects.remove(i);
+                this.renderer.destroyGameObject(gameObjects.get(i));
+                this.physics2D.destroyGameObject(gameObjects.get(i));
+                i--;
+            }
+        }
+    }
+
+    public void update(float dt){
+        this.camera.adjustProjection();
+        this.physics2D.update(dt);
+        for (int i = 0; i < gameObjects.size(); i++) {
+            gameObjects.get(i).update(dt);
+
+            if(gameObjects.get(i).isDead()){
+                gameObjects.remove(i);
+                this.renderer.destroyGameObject(gameObjects.get(i));
+                this.physics2D.destroyGameObject(gameObjects.get(i));
+                i--;
+            }
+        }
+    }
+
+    public void init(){
+        this.camera = new Camera(new Vector2f(-250, 0));
+        this.initializer.loadResoucres(this);
+        this.initializer.init(this);
+    }
 
     public void start(){
-        for(GameObject go : gameObjects){
+        for (int i = 0; i < gameObjects.size(); i++) {
+            GameObject go = gameObjects.get(i);
             go.start();
             this.renderer.add(go);
+            this.physics2D.add(go);
         }
         isRunning = true;
     }
@@ -42,21 +83,21 @@ public abstract class Scene {
             gameObjects.add(gameObject);
             gameObject.start();
             this.renderer.add(gameObject);
+            this.physics2D.add(gameObject);
         }
-    }
-
-    public GameObject getGameObject(int gameObjectId){
-        Optional<GameObject> result = this.gameObjects.stream().filter(gameObject -> gameObject.getUid() == gameObjectId).findFirst();
-        return result.orElse(null);
     }
 
     public Camera camera(){
         return this.camera;
     }
 
-    public void render(){}
+    public void render(){
+        this.renderer.render();
+    }
 
-    public void imgui(){}
+    public void imgui(){
+        this.initializer.imgui();
+    }
 
     public GameObject createGameObject(String name){
         GameObject gameObject = new GameObject(name);
@@ -65,7 +106,7 @@ public abstract class Scene {
         return gameObject;
     }
 
-    public void saveExit(){
+    public void save(){
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .registerTypeAdapter(Component.class, new ComponentDeserializer())
@@ -125,7 +166,21 @@ public abstract class Scene {
             logger.debug("" + maxGoId + " GameObjects. " + maxCompId + " Components");
             GameObject.init(maxGoId);
             Component.init(maxCompId);
-            this.loadedLevel = true;
         }
+    }
+
+    public void destroy(){
+        for (GameObject object: gameObjects) {
+            object.destroy();
+        }
+    }
+
+    public List<GameObject> getGameObjects() {
+        return gameObjects;
+    }
+
+    public GameObject getGameObject(int gameObjectId){
+        Optional<GameObject> result = this.gameObjects.stream().filter(gameObject -> gameObject.getUid() == gameObjectId).findFirst();
+        return result.orElse(null);
     }
 }

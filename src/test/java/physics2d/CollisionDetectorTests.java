@@ -1,6 +1,6 @@
 package physics2d;
 
-import net.killarexe.littlerage.engine.physics2d.rigidbody.IntersectionDetector2D;
+import net.killarexe.littlerage.engine.oldPhysics2d.rigidbody.IntersectionDetector2D;
 import net.killarexe.littlerage.engine.renderer.Line2D;
 import org.joml.Vector2f;
 import org.junit.Test;

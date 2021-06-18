@@ -12,6 +12,9 @@ project.ext.imguiVersion = '1.77-0.17.1'
 project.ext.lwjglNatives = "natives-windows"
 
 repositories {
+    flatDir{
+        dirs 'libs'
+    }
     jcenter()
     mavenCentral()
 }
@@ -22,16 +25,30 @@ dependencyManagement {
     }
 }
 
+/*jar {
+    baseName = project.name
+    manifest {
+        attributes 'Implementation-Version': version
+        attributes 'Target-Platforms': 'win32-x86-64, win32-x86'
+    }
+
+    dependsOn sources
+}*/
+
 dependencies {
+    //JUnit
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
-    //DISCORD RPC
+    //JBox2D
+    implementation name: "jbox2d-library"
+
+    //Discord RPC
     compile 'club.minnced:java-discord-rpc:2.0.1'
 
-    //GSON
+    //Gson
     implementation 'com.google.code.gson:gson:2.8.6'
 
-    //IMGUI
+    //ImGui
     implementation "io.imgui.java:binding:$imguiVersion"
     implementation "io.imgui.java:lwjgl3:$imguiVersion"
     runtimeOnly "io.imgui.java:natives-windows:$imguiVersion"

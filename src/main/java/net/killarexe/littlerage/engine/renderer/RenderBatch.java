@@ -1,6 +1,7 @@
 package net.killarexe.littlerage.engine.renderer;
 
 import net.killarexe.littlerage.engine.Window;
+import net.killarexe.littlerage.engine.gameObject.GameObject;
 import net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer;
 import net.killarexe.littlerage.engine.util.AssetPool;
 import net.killarexe.littlerage.engine.util.Logger;
@@ -119,7 +120,7 @@ public class RenderBatch implements Comparable<RenderBatch>{
             SpriteRenderer spr = sprites[i];
             if(spr.isDirty()){
                 loadVertexProperites(i);
-                spr.setClean();
+                spr.setDirty(false);
                 rebufferData = true;
             }
         }
@@ -254,18 +255,32 @@ public class RenderBatch implements Comparable<RenderBatch>{
         elements[offsetArrayIndex + 5] = offset + 1;
     }
 
+    public boolean destroyIfExists(GameObject object){
+        SpriteRenderer renderer = object.getComponents(SpriteRenderer.class);
+
+        for (int i = 0; i < numSprites; i++) {
+            if(sprites[i] == renderer){
+                for (int j = 0; j < numSprites - 1; j++) {
+                    sprites[j] = sprites[j + 1];
+                    sprites[j].setDirty(true);
+                }
+                numSprites--;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public boolean hasRoom(){
         return this.hasRoom;
     }
-
     public boolean hasTextureRoom(){
         return this.textures.size() < 8;
     }
-
     public boolean hasTexture(Texture texture){
         return this.textures.contains(texture);
     }
-
     public int getzIndex(){return this.zIndex;}
 
     @Override
