@@ -47,6 +47,8 @@ public class SpriteRenderer extends Component{
         return sprite.getTexCoords();
     }
 
+    public int getTextureId(){return sprite.getTexID();}
+
     public boolean isDirty(){return this.isDirty;}
 
     public void setSprite(Sprite sprite){

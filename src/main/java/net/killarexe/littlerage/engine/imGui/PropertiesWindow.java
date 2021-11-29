@@ -4,9 +4,7 @@ import imgui.ImGui;
 import net.killarexe.littlerage.engine.gameObject.GameObject;
 import net.killarexe.littlerage.engine.gameObject.components.NonPickable;
 import net.killarexe.littlerage.engine.input.MouseListener;
-import net.killarexe.littlerage.engine.physics2d.components.Box2DCollider;
-import net.killarexe.littlerage.engine.physics2d.components.CircleCollider;
-import net.killarexe.littlerage.engine.physics2d.components.Rigidbody2D;
+import net.killarexe.littlerage.engine.physics2d.components.*;
 import net.killarexe.littlerage.engine.renderer.PickingTexture;
 import net.killarexe.littlerage.engine.scene.Scene;
 

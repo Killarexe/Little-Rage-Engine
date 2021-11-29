@@ -2,15 +2,10 @@ package net.killarexe.littlerage.engine.physics2d;
 
 import net.killarexe.littlerage.engine.gameObject.GameObject;
 import net.killarexe.littlerage.engine.gameObject.components.Transform;
-import net.killarexe.littlerage.engine.physics2d.components.Box2DCollider;
-import net.killarexe.littlerage.engine.physics2d.components.CircleCollider;
-import net.killarexe.littlerage.engine.physics2d.components.Rigidbody2D;
+import net.killarexe.littlerage.engine.physics2d.components.*;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.BodyType;
-import org.jbox2d.dynamics.World;
+import org.jbox2d.dynamics.*;
 import org.joml.Vector2f;
 
 public class Physics2D {
@@ -27,8 +22,8 @@ public class Physics2D {
         Rigidbody2D rigidbody2D = object.getComponents(Rigidbody2D.class);
         if(rigidbody2D != null && rigidbody2D.getRawBody() == null){
             Transform transform = object.transform;
-            BodyDef bodyDef = new BodyDef();
 
+            BodyDef bodyDef = new BodyDef();
             bodyDef.angle = (float)Math.toRadians(transform.rotation);
             bodyDef.position.set(transform.pos.x, transform.pos.y);
             bodyDef.angularDamping = rigidbody2D.getAngularDamping();
@@ -55,7 +50,7 @@ public class Physics2D {
             if((circleCollider = object.getComponents(CircleCollider.class)) != null){
                 shape.setRadius(circleCollider.getRadius());
             }else if((box2DCollider = object.getComponents(Box2DCollider.class)) != null){
-                Vector2f halfSize = new Vector2f(box2DCollider.getHalfSize().mul(0.5f));
+                Vector2f halfSize = new Vector2f(box2DCollider.getHalfSize()).mul(0.5f);
                 Vector2f offset = box2DCollider.getOffset();
                 Vector2f origin = new Vector2f(box2DCollider.getOrigin());
                 shape.setAsBox(halfSize.x, halfSize.y, new Vec2(origin.x, origin.y), 0);

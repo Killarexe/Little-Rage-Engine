@@ -3,6 +3,7 @@ package net.killarexe.littlerage.engine.imGui;
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiStyleVar;
+import imgui.type.ImString;
 import net.killarexe.littlerage.engine.util.Logger;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -207,5 +208,27 @@ public class LRImGui {
         ImGui.popID();
 
         return res;
+    }
+
+    public static String inputText(String label, String value) {
+
+        ImGui.pushID(label);
+        ImGui.columns(2);
+        ImGui.setColumnWidth(0, defaultColumnWidth);
+        ImGui.text(label);
+        ImGui.nextColumn();
+
+        ImString outString = new ImString(value, 256);
+        if(ImGui.inputText("##" + label, outString)){
+            ImGui.columns(1);
+            ImGui.popID();
+
+            return outString.get();
+        }
+
+        ImGui.columns(1);
+        ImGui.popID();
+
+        return value;
     }
 }

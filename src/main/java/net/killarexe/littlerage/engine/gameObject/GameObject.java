@@ -1,8 +1,15 @@
 package net.killarexe.littlerage.engine.gameObject;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import imgui.ImGui;
 import net.killarexe.littlerage.engine.gameObject.components.Component;
+import net.killarexe.littlerage.engine.gameObject.components.SpriteRenderer;
 import net.killarexe.littlerage.engine.gameObject.components.Transform;
+import net.killarexe.littlerage.engine.gson.ComponentDeserializer;
+import net.killarexe.littlerage.engine.gson.GameObjectDeserialiser;
+import net.killarexe.littlerage.engine.imGui.LRImGui;
+import net.killarexe.littlerage.engine.util.AssetPool;
 import net.killarexe.littlerage.engine.util.Logger;
 
 import java.util.ArrayList;
@@ -12,7 +19,7 @@ public class GameObject {
     private static int ID_COUNTER = 0;
     private int uid = -1;
 
-    private String name;
+    public String name;
     private List<Component> components;
     public Transform transform;
 
@@ -85,7 +92,29 @@ public class GameObject {
         }
     }
 
+    public GameObject copy() {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Component.class, new ComponentDeserializer())
+                .registerTypeAdapter(GameObject.class, new GameObjectDeserialiser())
+                .create();
+        String objAsJson = gson.toJson(this);
+        GameObject obj = gson.fromJson(objAsJson, GameObject.class);
+
+        obj.getUid();
+        for (Component c : obj.getAllComponents()) {
+            c.generateId();
+        }
+
+        SpriteRenderer sprite = obj.getComponents(SpriteRenderer.class);
+        if (sprite != null && sprite.getTexture() != null) {
+            sprite.setTexture(AssetPool.getTexture(sprite.getTexture().getFilePath()));
+        }
+
+        return obj;
+    }
+
     public void imgui(){
+        this.name = LRImGui.inputText("Name", name);
         for(Component c: components){
             if(ImGui.collapsingHeader(c.getClass().getSimpleName())) {
                 c.imgui();

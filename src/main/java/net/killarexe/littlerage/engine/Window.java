@@ -13,7 +13,10 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.glfw.Callbacks.*;
+import static org.lwjgl.opengl.GL.*;
 import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL;
 
 public class Window implements Observer {
@@ -22,7 +25,9 @@ public class Window implements Observer {
     private static Window window = null;
     private static Scene currentScene;
     //public float r, g, b, a;
-    private int width, height;
+    private boolean isFullscreen, isResied;
+    private int[] windowPosX = new int[1], windowPosY = new int[1];
+    private int width, height, defaultWidth, defaultHeight;
     private long glfwWindow;
     private String title;
     private String VER = "0.1a";
@@ -30,6 +35,7 @@ public class Window implements Observer {
     private Framebuffer framebuffer;
     private PickingTexture pickingTexture;
     private DiscordController controller = new DiscordController("Playing Little Rage Maker v" + VER, "Editing...", null, null, "848548611423207446", null);;
+    private GLFWWindowSizeCallback sizeCallback;
 
     private static Logger LOGGER = new Logger(Window.class);
     private Logger logger = LOGGER;
@@ -38,7 +44,9 @@ public class Window implements Observer {
 
     private Window(){
         this.width = 1680;
-        this.height = 1050;
+        this.height = 1000;
+        this.defaultWidth = width;
+        this.defaultHeight = height;
         this.title = "Little Rage Engine v" + this.VER;
 
         EventSystem.addObserver(this);
@@ -83,14 +91,25 @@ public class Window implements Observer {
             LOGGER.error("Unable/Failed to create Window!");
         }
 
+        GLFWVidMode videoMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        windowPosX[0] = (videoMode.width() - width) / 2;
+        windowPosY[0] = (videoMode.height() - height) / 2;
+
+        sizeCallback = new GLFWWindowSizeCallback() {
+            @Override
+            public void invoke(long l, int i, int i1) {
+                width = i;
+                height = i1;
+                isResied = true;
+            }
+        };
+
+        glfwSetWindowPos(glfwWindow, windowPosX[0], windowPosY[0]);
         glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePosCallback);
         glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
         glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
         glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
-        glfwSetWindowSizeCallback(glfwWindow, (w, newWidth, newHeight) ->{
-            Window.setWidth(newWidth);
-            Window.setHeight(newHeight);
-        });
+        glfwSetWindowSizeCallback(glfwWindow, sizeCallback);
 
         //Make OpenGL
         glfwMakeContextCurrent(glfwWindow);
@@ -200,12 +219,14 @@ public class Window implements Observer {
         switch (event.type){
             case GameEngineStartPlay:
                 logger.info("Start Playing!");
+                controller.setState("Playing...");
                 this.runtimePlaying = true;
                 currentScene.save();
                 changeScene(new LevelEditiorSceneInitializer());
                 break;
             case GameEngineStopPlay:
                 logger.info("Stop Playing!");
+                controller.setState("Editing...");
                 this.runtimePlaying = false;
                 Window.changeScene(new LevelEditiorSceneInitializer());
                 break;
@@ -228,6 +249,25 @@ public class Window implements Observer {
         getInstance().height = newHeight;
     }
 
+    public void setFullscreen(boolean isFullscreen, boolean resize) {
+        this.isFullscreen = isFullscreen;
+        isResied = true;
+        if(isFullscreen){
+            if(resize) {
+                width = glfwGetVideoMode(glfwGetPrimaryMonitor()).width();
+                height = glfwGetVideoMode(glfwGetPrimaryMonitor()).height();
+            }
+            glfwGetWindowPos(glfwWindow, windowPosX, windowPosY);
+            glfwSetWindowMonitor(glfwWindow, glfwGetPrimaryMonitor(), 0, 0, width, height, 0);
+        }else{
+            if(resize) {
+                width = defaultWidth;
+                height = defaultHeight;
+            }
+            glfwSetWindowMonitor(glfwWindow, 0, windowPosX[0], windowPosY[0], width, height, 0);
+        }
+    }
+
     //Getters
     public static Scene getScene(){
         return getInstance().currentScene;
@@ -239,4 +279,5 @@ public class Window implements Observer {
     public static float getTargetAspect1610(){return 16.0f / 10.0f;}
     public static ImGuiLayer getImGuiLayer(){return getInstance().imGuiLayer;}
     public static DiscordController getController() { return getInstance().controller; }
+    public boolean isIsFullscreen() { return isFullscreen; }
 }

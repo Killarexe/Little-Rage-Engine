@@ -5,6 +5,7 @@ import static org.lwjgl.glfw.GLFW.*;
 public class KeyListener {
     private static KeyListener instance;
     private boolean KeyPressed[] = new boolean[350];
+    private boolean keyBeginPress[] = new boolean[350];
 
     private KeyListener(){
 
@@ -23,6 +24,14 @@ public class KeyListener {
         }else if(action == GLFW_RELEASE){
             getInstance().KeyPressed[key] = false;
         }
+    }
+
+    public static boolean keyBeginPress(int keyCode) {
+        boolean result = getInstance().keyBeginPress[keyCode];
+        if (result) {
+            getInstance().keyBeginPress[keyCode] = false;
+        }
+        return result;
     }
 
     public static boolean isKeyPressed(int keyCode){

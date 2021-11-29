@@ -63,6 +63,11 @@ public class DiscordController {
         rpc.Discord_Shutdown();
     }
 
+    public void update(){
+        logger.debug("Updating...");
+        rpc.Discord_UpdatePresence(presence);
+    }
+
 
     public String getState() {
         return state;
@@ -71,6 +76,7 @@ public class DiscordController {
     public void setState(String state) {
         logger.debug("Set State to: " + state);
         this.state = state;
+        update();
     }
 
     public String getDetails() {
@@ -80,6 +86,7 @@ public class DiscordController {
     public void setDetails(String details) {
         logger.debug("Set Details to: " + details);
         this.details = details;
+        update();
     }
 
     public String getLargeImageText() {
@@ -89,6 +96,7 @@ public class DiscordController {
     public void setLargeImageText(String largeImageText) {
         logger.debug("Set LagreImageText to: " + largeImageText);
         this.largeImageText = largeImageText;
+        update();
     }
 
     public String getSmallImageText() {
@@ -98,6 +106,7 @@ public class DiscordController {
     public void setSmallImageText(String smallImageText) {
         logger.debug("Set SmallImageText to: " + smallImageText);
         this.smallImageText = smallImageText;
+        update();
     }
 
     public String getApplicationId() {

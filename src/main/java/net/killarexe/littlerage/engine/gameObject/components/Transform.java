@@ -1,5 +1,6 @@
 package net.killarexe.littlerage.engine.gameObject.components;
 
+import net.killarexe.littlerage.engine.imGui.LRImGui;
 import org.joml.Vector2f;
 
 public class Transform extends Component{
@@ -34,6 +35,14 @@ public class Transform extends Component{
     public void copy(Transform transform){
         transform.pos.set(this.pos);
         transform.scale.set(this.scale);
+    }
+
+    @Override
+    public void imgui() {
+        LRImGui.drawVec2Control("Position", this.pos);
+        LRImGui.drawVec2Control("Scale", this.scale, 32.0f);
+        this.rotation = LRImGui.dragFloat("Rotation", this.rotation);
+        this.zIndex = LRImGui.dragInt("Z-Index", this.zIndex);
     }
 
     @Override

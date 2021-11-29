@@ -9,13 +9,12 @@ public class MenuBar {
 
     public void imgui(){
 
-        ImGui.beginMainMenuBar();
+        ImGui.beginMenuBar();
 
         if(ImGui.beginMenu("File")){
 
             if(ImGui.menuItem("Save", "Ctrl+S")){
                 EventSystem.notify(null, new Event(EventType.SaveLevel));
-
             }
 
             if(ImGui.menuItem("Load", "Ctrl+O")){
@@ -23,12 +22,12 @@ public class MenuBar {
             }
 
             if(ImGui.menuItem("Close", "Ctrl+Esc")){
-                EventSystem.notify(null, new Event());
+                EventSystem.notify(null, new Event(EventType.CloseLevel));
             }
 
             ImGui.endMenu();
         }
 
-        ImGui.endMainMenuBar();
+        ImGui.endMenuBar();
     }
 }

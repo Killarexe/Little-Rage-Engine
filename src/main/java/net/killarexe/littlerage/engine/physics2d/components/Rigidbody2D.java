@@ -1,6 +1,7 @@
 package net.killarexe.littlerage.engine.physics2d.components;
 
 import net.killarexe.littlerage.engine.gameObject.components.Component;
+import net.killarexe.littlerage.engine.imGui.LRImGui;
 import net.killarexe.littlerage.engine.physics2d.enums.BodyType;
 import org.jbox2d.dynamics.Body;
 import org.joml.Vector2f;
@@ -22,6 +23,9 @@ public class Rigidbody2D extends Component {
         if(rawBody != null){
             this.gameObject.transform.pos.set(rawBody.getPosition().x, rawBody.getPosition().y);
             this.gameObject.transform.rotation = (float)Math.toDegrees(rawBody.getAngle());
+        }
+        if(bodyType == BodyType.Dynamic && mass != 0){
+            mass = 1;
         }
     }
 

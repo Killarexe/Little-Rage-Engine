@@ -1,9 +1,11 @@
 package net.killarexe.littlerage.engine.gameObject.components;
 
 import imgui.ImGui;
+import imgui.type.ImInt;
 import net.killarexe.littlerage.engine.imGui.LRImGui;
 import net.killarexe.littlerage.engine.gameObject.GameObject;
 import net.killarexe.littlerage.engine.util.Logger;
+import org.jbox2d.dynamics.BodyType;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -43,10 +45,10 @@ public abstract class Component {
 
                 if(type == int.class){
                     int val = (int)value;
-                    LRImGui.dragInt(name, val);
+                    field.set(this, LRImGui.dragInt(name, val));
                 }else if(type == float.class){
                     float val = (float)value;
-                    LRImGui.dragFloat(name, val);
+                    field.set(this, LRImGui.dragFloat(name, val));
                 }else if(type == boolean.class){
                     boolean val = (boolean)value;
                     if(ImGui.checkbox(name + ": ", val)){
@@ -63,6 +65,13 @@ public abstract class Component {
                     float[] imVec = {val.x , val.y, val.z, val.w};
                     if(ImGui.dragFloat4(name + ": ", imVec)){
                         val.set(imVec[0], imVec[1], imVec[2], imVec[3]);
+                    }
+                }else if(type.isEnum()){
+                    String[] vals = getEnumValues(type);
+                    String enumType = ((Enum)value).name();
+                    ImInt index = new ImInt(indexOf(enumType, vals));
+                    if(ImGui.combo(field.getName(), index, vals, vals.length)){
+                        field.set(this, type.getEnumConstants()[index.get()]);
                     }
                 }
 
@@ -90,4 +99,24 @@ public abstract class Component {
     }
 
     public int getUid(){return this.uid;}
+
+    private <T extends Enum<T>> String[] getEnumValues(Class<T> enumType) {
+        String[] enumValues = new String[enumType.getEnumConstants().length];
+        int i = 0;
+        for (T enumIntegerValue : enumType.getEnumConstants()) {
+            enumValues[i] = enumIntegerValue.name();
+            i++;
+        }
+        return enumValues;
+    }
+
+    private int indexOf(String str, String[] arr) {
+        for (int i=0; i < arr.length; i++) {
+            if (str.equals(arr[i])) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }

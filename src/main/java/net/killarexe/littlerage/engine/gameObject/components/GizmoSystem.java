@@ -35,7 +35,7 @@ public class GizmoSystem extends Component{
 
         if (KeyListener.isKeyPressed(GLFW_KEY_E)) {
             usingGizmo = 0;
-        } else if (KeyListener.isKeyPressed(GLFW_KEY_R)) {
+        }else if (KeyListener.isKeyPressed(GLFW_KEY_R)) {
             usingGizmo = 1;
         }
     }

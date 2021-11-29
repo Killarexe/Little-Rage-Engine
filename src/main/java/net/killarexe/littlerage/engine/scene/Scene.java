@@ -140,7 +140,8 @@ public class Scene {
         try {
             inFile = new String(Files.readAllBytes(Paths.get("data/level/level.lr")));
         }catch (IOException e){
-            logger.error("Couldn't find/load the file: " + inFile);
+            logger.warn("Couldn't find/load the file: " + inFile);
+            logger.info("Creating level file...");
         }
 
         if(!inFile.equals("")){

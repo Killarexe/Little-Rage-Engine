@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Renderer {
-    private final int MAX_BATCH_SIZE = 65536;
+    private final int MAX_BATCH_SIZE = 1000;
     private List<RenderBatch> batches;
     private static Shader currentShader;
 
@@ -47,7 +47,8 @@ public class Renderer {
 
     public void render(){
         currentShader.use();
-        for(RenderBatch batch: batches){
+        for (int i = 0; i < batches.size(); i++) {
+            RenderBatch batch = batches.get(i);
             batch.render();
         }
     }
@@ -56,7 +57,7 @@ public class Renderer {
         if(object.getComponents(SpriteRenderer.class) == null){return;}
 
         for (RenderBatch batch: batches) {
-            if(batch.destroyIfExists(object)){
+                if(batch.destroyIfExists(object)){
                 return;
             }
         }
