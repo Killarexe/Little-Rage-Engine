@@ -1,8 +1,0 @@
-net/killarexe/littlerage/engine/MouseListener.java
- net.killarexe.littlerage.engine.MouseListener
-net/killarexe/littlerage/engine/KeyListener.java
- net.killarexe.littlerage.engine.KeyListener
-net/killarexe/littlerage/engine/Window.java
- net.killarexe.littlerage.engine.Window
-net/killarexe/littlerage/Main.java
- net.killarexe.littlerage.Main
